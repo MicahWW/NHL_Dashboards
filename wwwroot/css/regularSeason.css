@@ -1,0 +1,120 @@
+:root {
+    /*When running in reach this needs to be modified to 360px, otherwise 350px*/
+    --baseRow: 350px;
+}
+
+body {
+    background-image: url('/images/background.png');
+    background-repeat: no-repeat;
+    margin: 0px;
+    width: 1080px;
+    height: 1920px;
+}
+
+h1 {
+    color: white;
+    font-family: sans-serif;
+}
+
+.teamDiv {
+    left: 200px;
+    position: absolute;
+    display: inline-flex;
+    height: 80px;
+}
+
+.central1 {
+    top: var(--baseRow);
+}
+
+.central2 {
+    top: calc(var(--baseRow) + 90px);
+}
+
+.central3 {
+    top: calc(var(--baseRow) + 180px);
+}
+
+.pacific1 {
+    top: calc(var(--baseRow) + 300px);
+}
+
+.pacific2 {
+    top: calc(var(--baseRow) + 390px);
+}
+
+.pacific3 {
+    top: calc(var(--baseRow) + 480px);
+}
+
+.wildCard1 {
+    top: calc(var(--baseRow) + 600px);
+}
+
+.wildCard2 {
+    top: calc(var(--baseRow) + 690px);
+}
+
+.wildCard3 {
+    top: calc(var(--baseRow) + 810px);
+}
+
+.wildCard4 {
+    top: calc(var(--baseRow) + 900px);
+}
+
+.wildCard5 {
+    top: calc(var(--baseRow) + 990px);
+}
+
+.wildCard6 {
+    top: calc(var(--baseRow) + 1080px);
+}
+
+.wildCard7 {
+    top: calc(var(--baseRow) + 1170px);
+}
+
+.wildCard8 {
+    top: calc(var(--baseRow) + 1260px);
+}
+
+.wildCard9 {
+    top: calc(var(--baseRow) + 1350px);
+}
+
+.wildCard10 {
+    top: calc(var(--baseRow) + 1440px);
+}
+
+.logo {
+    position: relative;
+    width: 80px;
+    padding-left: 20px;
+}
+
+.name {
+    position: relative;
+    width: 430px;
+}
+
+.clinchIndicator {
+    position: relative;
+    width: 80px;
+    text-align: center;
+    padding-left: 20px;
+}
+
+.gamesPlayed {
+    position: relative;
+    width: 80px;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.points {
+    position: relative;
+    width: 80px;
+    text-align: center;
+    margin-left: 20px;
+}
