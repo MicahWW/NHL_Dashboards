@@ -106,34 +106,34 @@ public class RegularSeasonStandingsApiController : ControllerBase
                         switch (standing)
                         {
                             case { ConferenceName: "Western", WildcardSequence: 1 }:
-                                output.Wildcard1 = teamData;
+                                output.WesternWildcard1 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 2 }:
-                                output.Wildcard2 = teamData;
+                                output.WesternWildcard2 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 3 }:
-                                output.Wildcard3 = teamData;
+                                output.WesternWildcard3 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 4 }:
-                                output.Wildcard4 = teamData;
+                                output.WesternWildcard4 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 5 }:
-                                output.Wildcard5 = teamData;
+                                output.WesternWildcard5 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 6 }:
-                                output.Wildcard6 = teamData;
+                                output.WesternWildcard6 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 7 }:
-                                output.Wildcard7 = teamData;
+                                output.WesternWildcard7 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 8 }:
-                                output.Wildcard8 = teamData;
+                                output.WesternWildcard8 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 9 }:
-                                output.Wildcard9 = teamData;
+                                output.WesternWildcard9 = teamData;
                                 break;
                             case { ConferenceName: "Western", WildcardSequence: 10 }:
-                                output.Wildcard10 = teamData;
+                                output.WesternWildcard10 = teamData;
                                 break;
                             case { ConferenceName: "Western", DivisionSequence: 1, DivisionName: "Central" }:
                                 output.Central1 = teamData;
@@ -152,6 +152,54 @@ public class RegularSeasonStandingsApiController : ControllerBase
                                 break;
                             case { ConferenceName: "Western", DivisionSequence: 3, DivisionName: "Pacific" }:
                                 output.Pacific3 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 1 }:
+                                output.EasternWildcard1 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 2 }:
+                                output.EasternWildcard2 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 3 }:
+                                output.EasternWildcard3 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 4 }:
+                                output.EasternWildcard4 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 5 }:
+                                output.EasternWildcard5 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 6 }:
+                                output.EasternWildcard6 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 7 }:
+                                output.EasternWildcard7 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 8 }:
+                                output.EasternWildcard8 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 9 }:
+                                output.EasternWildcard9 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", WildcardSequence: 10 }:
+                                output.EasternWildcard10 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", DivisionSequence: 1, DivisionName: "Metropolitan" }:
+                                output.Metropolitan1 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", DivisionSequence: 2, DivisionName: "Metropolitan" }:
+                                output.Metropolitan2 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", DivisionSequence: 3, DivisionName: "Metropolitan" }:
+                                output.Metropolitan3 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", DivisionSequence: 1, DivisionName: "Atlantic" }:
+                                output.Atlantic1 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", DivisionSequence: 2, DivisionName: "Atlantic" }:
+                                output.Atlantic2 = teamData;
+                                break;
+                            case { ConferenceName: "Eastern", DivisionSequence: 3, DivisionName: "Atlantic" }:
+                                output.Atlantic3 = teamData;
                                 break;
                         }
                     }

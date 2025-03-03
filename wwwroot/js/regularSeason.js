@@ -46,16 +46,16 @@ function displayData(data) {
     setRow(data.pacific2, "pacific", 2);
     setRow(data.pacific3, "pacific", 3);
 
-    setRow(data.wildcard1, "wildCard", 1);
-    setRow(data.wildcard2, "wildCard", 2);
-    setRow(data.wildcard3, "wildCard", 3);
-    setRow(data.wildcard4, "wildCard", 4);
-    setRow(data.wildcard5, "wildCard", 5);
-    setRow(data.wildcard6, "wildCard", 6);
-    setRow(data.wildcard7, "wildCard", 7);
-    setRow(data.wildcard8, "wildCard", 8);
-    setRow(data.wildcard9, "wildCard", 9);
-    setRow(data.wildcard10, "wildCard", 10);
+    setRow(data.westernWildcard1, "wildCard", 1);
+    setRow(data.westernWildcard2, "wildCard", 2);
+    setRow(data.westernWildcard3, "wildCard", 3);
+    setRow(data.westernWildcard4, "wildCard", 4);
+    setRow(data.westernWildcard5, "wildCard", 5);
+    setRow(data.westernWildcard6, "wildCard", 6);
+    setRow(data.westernWildcard7, "wildCard", 7);
+    setRow(data.westernWildcard8, "wildCard", 8);
+    setRow(data.westernWildcard9, "wildCard", 9);
+    setRow(data.westernWildcard10, "wildCard", 10);
 }
 
 
