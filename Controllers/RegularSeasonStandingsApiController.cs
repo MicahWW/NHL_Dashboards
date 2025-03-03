@@ -8,7 +8,7 @@ using StaticApps.Models;
 namespace StaticApps.Controllers;
 
 [ApiController]
-[Route("api/standings/regular")]
+[Route("[controller]")]
 public class RegularSeasonStandingsApiController : ControllerBase
 {
     private readonly IHttpClientFactory _httpClientFactory;
@@ -20,7 +20,7 @@ public class RegularSeasonStandingsApiController : ControllerBase
         _httpClientFactory = httpClientFactory;
     }
 
-    [HttpGet(Name = "foo")]
+    [HttpGet]
     public async Task<RegularSeasonStandingsApiModel> Get()
     {
         var httpClient = _httpClientFactory.CreateClient("NhlApi");

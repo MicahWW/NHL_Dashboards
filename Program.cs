@@ -1,7 +1,13 @@
+using StaticApps.Conventions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews( options =>
+{
+    options.Conventions.Add(new CustomRouteConvention());    
+}
+);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApiDocument();
 builder.Services.AddHttpClient(
