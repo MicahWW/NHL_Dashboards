@@ -1,29 +1,26 @@
 // The URL to get the Standings data from
-let requestURL = "/api/standings/regular";
+let requestURL = "api" + document.location.pathname;
+const searchParams = new URLSearchParams(document.location.search);
 
-// The logo and color to use if not defined below
-let not_found = {"logo": "https://s3.amazonaws.com/jebbit-assets/images/kWyOoiBQ/business-images/cOZXFMB7Qwy10vktNxer_NHL_Shield_English_Primary.png", 
-    "color": "rgb(127, 127, 127)"
-};
 // The logo link and team colors
 let displayInfo = {};
-displayInfo.CHI = {"logo": "https://assets.nhle.com/logos/nhl/svg/CHI_dark.svg",  "color": "rgb(207, 10, 44)"}
-displayInfo.NSH = {"logo": "https://assets.nhle.com/logos/nhl/svg/NSH_dark.svg",  "color": "rgb(255, 184, 28)"}
-displayInfo.STL = {"logo": "https://assets.nhle.com/logos/nhl/svg/STL_black.svg", "color": "rgb(0, 47, 135)"}
-displayInfo.CGY = {"logo": "https://assets.nhle.com/logos/nhl/svg/CGY_dark.svg",  "color": "rgb(210, 0, 28)"}
-displayInfo.COL = {"logo": "https://assets.nhle.com/logos/nhl/svg/COL_dark.svg",  "color": "rgb(111, 38, 61)"}
-displayInfo.EDM = {"logo": "https://assets.nhle.com/logos/nhl/svg/EDM_dark.svg",  "color": "rgb(4, 30, 66)"}
-displayInfo.VAN = {"logo": "https://assets.nhle.com/logos/nhl/svg/VAN_light.svg", "color": "rgb(0, 32, 91)"}
-displayInfo.ANA = {"logo": "https://assets.nhle.com/logos/nhl/svg/ANA_dark.svg",  "color": "rgb(252, 72, 2)"}
-displayInfo.DAL = {"logo": "https://assets.nhle.com/logos/nhl/svg/DAL_light.svg", "color": "rgb(0, 104, 71)"}
-displayInfo.LAK = {"logo": "https://assets.nhle.com/logos/nhl/svg/LAK_dark.svg",  "color": "rgb(17, 17, 17)"}
-displayInfo.SJS = {"logo": "https://assets.nhle.com/logos/nhl/svg/SJS_dark.svg",  "color": "rgb(0, 109, 117)"}
-displayInfo.MIN = {"logo": "https://assets.nhle.com/logos/nhl/svg/MIN_dark.svg",  "color": "rgb(175, 35, 36)"}
-displayInfo.WPG = {"logo": "https://assets.nhle.com/logos/nhl/svg/WPG_dark.svg",  "color": "rgb(4, 30, 66)"}
-displayInfo.ARI = {"logo": "https://assets.nhle.com/logos/nhl/svg/ARI_dark.svg",  "color": "rgb(140, 38, 51)"}
-displayInfo.VGK = {"logo": "https://assets.nhle.com/logos/nhl/svg/VGK_dark.svg",  "color": "rgb(185, 151, 91)"}
-displayInfo.SEA = {"logo": "https://assets.nhle.com/logos/nhl/svg/SEA_dark.svg",  "color": "rgb(0, 22, 40)"}
-displayInfo.UTA = {"logo": "https://assets.nhle.com/logos/nhl/svg/UTA_light.svg", "color": "rgb(113, 175, 229"}
+displayInfo.CHI = {"logo": "https://assets.nhle.com/logos/nhl/svg/CHI_dark.svg",  "color": "rgb(207, 10, 44)"};
+displayInfo.NSH = {"logo": "https://assets.nhle.com/logos/nhl/svg/NSH_dark.svg",  "color": "rgb(255, 184, 28)"};
+displayInfo.STL = {"logo": "https://assets.nhle.com/logos/nhl/svg/STL_black.svg", "color": "rgb(0, 47, 135)"};
+displayInfo.CGY = {"logo": "https://assets.nhle.com/logos/nhl/svg/CGY_dark.svg",  "color": "rgb(210, 0, 28)"};
+displayInfo.COL = {"logo": "https://assets.nhle.com/logos/nhl/svg/COL_dark.svg",  "color": "rgb(111, 38, 61)"};
+displayInfo.EDM = {"logo": "https://assets.nhle.com/logos/nhl/svg/EDM_dark.svg",  "color": "rgb(4, 30, 66)"};
+displayInfo.VAN = {"logo": "https://assets.nhle.com/logos/nhl/svg/VAN_light.svg", "color": "rgb(0, 32, 91)"};
+displayInfo.ANA = {"logo": "https://assets.nhle.com/logos/nhl/svg/ANA_dark.svg",  "color": "rgb(252, 72, 2)"};
+displayInfo.DAL = {"logo": "https://assets.nhle.com/logos/nhl/svg/DAL_light.svg", "color": "rgb(0, 104, 71)"};
+displayInfo.LAK = {"logo": "https://assets.nhle.com/logos/nhl/svg/LAK_dark.svg",  "color": "rgb(17, 17, 17)"};
+displayInfo.SJS = {"logo": "https://assets.nhle.com/logos/nhl/svg/SJS_dark.svg",  "color": "rgb(0, 109, 117)"};
+displayInfo.MIN = {"logo": "https://assets.nhle.com/logos/nhl/svg/MIN_dark.svg",  "color": "rgb(175, 35, 36)"};
+displayInfo.WPG = {"logo": "https://assets.nhle.com/logos/nhl/svg/WPG_dark.svg",  "color": "rgb(4, 30, 66)"};
+displayInfo.ARI = {"logo": "https://assets.nhle.com/logos/nhl/svg/ARI_dark.svg",  "color": "rgb(140, 38, 51)"};
+displayInfo.VGK = {"logo": "https://assets.nhle.com/logos/nhl/svg/VGK_dark.svg",  "color": "rgb(185, 151, 91)"};
+displayInfo.SEA = {"logo": "https://assets.nhle.com/logos/nhl/svg/SEA_dark.svg",  "color": "rgb(0, 22, 40)"};
+displayInfo.UTA = {"logo": "https://assets.nhle.com/logos/nhl/svg/UTA_light.svg", "color": "rgb(113, 175, 229)"};
 
 
 // fetches data then passes it to the function to display it
@@ -62,13 +59,13 @@ function displayData(data) {
 }
 
 
-/* Row refers to divison (if top 3) or wildcard (if out of top 3)
-* index refers to the postion
+/* Row refers to division (if top 3) or wildcard (if out of top 3)
+* index refers to the position
 */
 function setRow(team, row, index) {
     let ele = document.getElementsByClassName(`${row}${index}`)[0];
 
-    ele.getElementsByClassName("logo")[0].src = (displayInfo[team.abbr] || not_found).logo;
+    ele.getElementsByClassName("logo")[0].src = displayInfo.hasOwnProperty(team.abbr) ? displayInfo[team.abbr].logo : `https://assets.nhle.com/logos/nhl/svg/${team.abbr}_dark.svg`;
     ele.getElementsByClassName("name")[0].innerHTML = team.name;
     ele.getElementsByClassName("clinchIndicator")[0].innerHTML = team.clinchIndicator;
     ele.getElementsByClassName("gamesPlayed")[0].innerHTML = team.gamesPlayed;
@@ -76,6 +73,6 @@ function setRow(team, row, index) {
 }
 
 
-// inital request then set the interval for every 30 minutes
+// initial request then set the interval for every 30 minutes
 getData();
 setInterval(getData, 1800000);
