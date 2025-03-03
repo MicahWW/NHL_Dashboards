@@ -77,93 +77,85 @@ public class RegularSeasonStandingsApiController : ControllerBase
                 if (json != null && json["standings"] != null && json["standings"] is JsonArray)
                 {
                     var output = new RegularSeasonStandingsApiModel();
+                    var standings = JsonSerializer.Deserialize<List<NhlRegularSeasonStandings>>(json["standings"], new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    if (standings == null)
+                    {
+                        return Problem
+                        (
+                            detail: "Deserializing the standings failed",
+                            statusCode: 500,
+                            title: "Deserialize standings"
+                        );
+                    }
 
                     // iterate through standings and assign to the appropriate position
-                    foreach (var item in (JsonArray)json["standings"]!)
+                    foreach (var standing in standings)
                     {
-                        if (item != null) 
+                        var teamData = new RegularSeasonStandingsApiModel.TeamData
                         {
-                            var teamData = new RegularSeasonStandingsApiModel.TeamData
-                            {
-                                Points = (int)item["points"]!,
-                                GamesPlayed = (int)item["gamesPlayed"]!,
-                                Name = (string?)item["teamCommonName"]!["default"],
-                                Abbr = (string?)item["teamAbbrev"]!["default"]
-                            };
+                            Points = standing.Points,
+                            GamesPlayed = standing.GamesPlayed,
+                            Name = standing.TeamCommonName,
+                            Abbr = standing.TeamAbbrev
+                        };
 
-
-                            if ((string?)item["conferenceName"] == "Western")
-                            {
-                                if ((int?)item["wildcardSequence"] > 0)
-                                {
-                                    switch ((int)item["wildcardSequence"]!)
-                                    {
-                                        case 1:
-                                            output.Wildcard1 = teamData;
-                                            break;
-                                        case 2:
-                                            output.Wildcard2 = teamData;
-                                            break;
-                                        case 3:
-                                            output.Wildcard3 = teamData;
-                                            break;
-                                        case 4:
-                                            output.Wildcard4 = teamData;
-                                            break;
-                                        case 5:
-                                            output.Wildcard5 = teamData;
-                                            break;
-                                        case 6:
-                                            output.Wildcard6 = teamData;
-                                            break;
-                                        case 7:
-                                            output.Wildcard7 = teamData;
-                                            break;
-                                        case 8:
-                                            output.Wildcard8 = teamData;
-                                            break;
-                                        case 9:
-                                            output.Wildcard9 = teamData;
-                                            break;
-                                        case 10:
-                                            output.Wildcard10 = teamData;
-                                            break;
-                                    }
-                                }
-                                else if ((string?)item["divisionName"] == "Central")
-                                {
-                                    switch ((int?)item["divisionSequence"])
-                                    {
-                                        case 1:
-                                            output.Central1 = teamData;
-                                            break;
-                                        case 2:
-                                            output.Central2 = teamData;
-                                            break;
-                                        case 3:
-                                            output.Central3 = teamData;
-                                            break;
-                                    }
-                                }
-                                else if ((string?)item["divisionName"] == "Pacific")
-                                {
-                                    switch ((int?)item["divisionSequence"])
-                                    {
-                                        case 1:
-                                            output.Pacific1 = teamData;
-                                            break;
-                                        case 2:
-                                            output.Pacific2 = teamData;
-                                            break;
-                                        case 3:
-                                            output.Pacific3 = teamData;
-                                            break;
-                                    }
-                                }
-                                
-                            }
+                        switch (standing)
+                        {
+                            case { ConferenceName: "Western", WildcardSequence: 1 }:
+                                output.Wildcard1 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 2 }:
+                                output.Wildcard2 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 3 }:
+                                output.Wildcard3 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 4 }:
+                                output.Wildcard4 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 5 }:
+                                output.Wildcard5 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 6 }:
+                                output.Wildcard6 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 7 }:
+                                output.Wildcard7 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 8 }:
+                                output.Wildcard8 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 9 }:
+                                output.Wildcard9 = teamData;
+                                break;
+                            case { ConferenceName: "Western", WildcardSequence: 10 }:
+                                output.Wildcard10 = teamData;
+                                break;
+                            case { ConferenceName: "Western", DivisionSequence: 1, DivisionName: "Central" }:
+                                output.Central1 = teamData;
+                                break;
+                            case { ConferenceName: "Western", DivisionSequence: 2, DivisionName: "Central" }:
+                                output.Central2 = teamData;
+                                break;
+                            case { ConferenceName: "Western", DivisionSequence: 3, DivisionName: "Central" }:
+                                output.Central3 = teamData;
+                                break;
+                            case { ConferenceName: "Western", DivisionSequence: 1, DivisionName: "Pacific" }:
+                                output.Pacific1 = teamData;
+                                break;
+                            case { ConferenceName: "Western", DivisionSequence: 2, DivisionName: "Pacific" }:
+                                output.Pacific2 = teamData;
+                                break;
+                            case { ConferenceName: "Western", DivisionSequence: 3, DivisionName: "Pacific" }:
+                                output.Pacific3 = teamData;
+                                break;
                         }
                     }
+
                     return Ok(output);
                 }
                 else
