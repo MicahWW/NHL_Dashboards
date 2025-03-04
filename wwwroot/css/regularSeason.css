@@ -23,27 +23,27 @@ h1 {
     height: 80px;
 }
 
-.central1 {
+.central1, .atlantic1 {
     top: var(--baseRow);
 }
 
-.central2 {
+.central2, .atlantic2 {
     top: calc(var(--baseRow) + 90px);
 }
 
-.central3 {
+.central3, .atlantic3 {
     top: calc(var(--baseRow) + 180px);
 }
 
-.pacific1 {
+.pacific1, .metropolitan1 {
     top: calc(var(--baseRow) + 300px);
 }
 
-.pacific2 {
+.pacific2, .metropolitan2 {
     top: calc(var(--baseRow) + 390px);
 }
 
-.pacific3 {
+.pacific3, .metropolitan3 {
     top: calc(var(--baseRow) + 480px);
 }
 

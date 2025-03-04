@@ -13,8 +13,15 @@ public class RegularSeasonStandingsController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public IActionResult Eastern()
     {
-        return View();
+        ViewData["Conference"] = "Eastern";
+        return View("standings");
+    }
+
+    public IActionResult Western()
+    {
+        ViewData["Conference"] = "Western";
+        return View("standings");
     }
 }

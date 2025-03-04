@@ -1,5 +1,5 @@
 // The URL to get the Standings data from
-let requestURL = "api" + document.location.pathname;
+let requestURL = "/api/RegularSeasonStandings"
 const searchParams = new URLSearchParams(document.location.search);
 
 // The logo link and team colors
@@ -38,24 +38,45 @@ const getData = async () => {
 
 
 function displayData(data) {
-    setRow(data.central1, "central", 1);
-    setRow(data.central2, "central", 2);
-    setRow(data.central3, "central", 3);
-
-    setRow(data.pacific1, "pacific", 1);
-    setRow(data.pacific2, "pacific", 2);
-    setRow(data.pacific3, "pacific", 3);
-
-    setRow(data.westernWildcard1, "wildCard", 1);
-    setRow(data.westernWildcard2, "wildCard", 2);
-    setRow(data.westernWildcard3, "wildCard", 3);
-    setRow(data.westernWildcard4, "wildCard", 4);
-    setRow(data.westernWildcard5, "wildCard", 5);
-    setRow(data.westernWildcard6, "wildCard", 6);
-    setRow(data.westernWildcard7, "wildCard", 7);
-    setRow(data.westernWildcard8, "wildCard", 8);
-    setRow(data.westernWildcard9, "wildCard", 9);
-    setRow(data.westernWildcard10, "wildCard", 10);
+    if (document.title === "Western Conference Standings") {
+        setRow(data.central1, "central", 1);
+        setRow(data.central2, "central", 2);
+        setRow(data.central3, "central", 3);
+    
+        setRow(data.pacific1, "pacific", 1);
+        setRow(data.pacific2, "pacific", 2);
+        setRow(data.pacific3, "pacific", 3);
+    
+        setRow(data.westernWildcard1, "wildCard", 1);
+        setRow(data.westernWildcard2, "wildCard", 2);
+        setRow(data.westernWildcard3, "wildCard", 3);
+        setRow(data.westernWildcard4, "wildCard", 4);
+        setRow(data.westernWildcard5, "wildCard", 5);
+        setRow(data.westernWildcard6, "wildCard", 6);
+        setRow(data.westernWildcard7, "wildCard", 7);
+        setRow(data.westernWildcard8, "wildCard", 8);
+        setRow(data.westernWildcard9, "wildCard", 9);
+        setRow(data.westernWildcard10, "wildCard", 10);
+    } else if (document.title === "Eastern Conference Standings") {
+        setRow(data.atlantic1, "atlantic", 1);
+        setRow(data.atlantic2, "atlantic", 2);
+        setRow(data.atlantic3, "atlantic", 3);
+    
+        setRow(data.metropolitan1, "metropolitan", 1);
+        setRow(data.metropolitan2, "metropolitan", 2);
+        setRow(data.metropolitan3, "metropolitan", 3);
+    
+        setRow(data.easternWildcard1, "wildCard", 1);
+        setRow(data.easternWildcard2, "wildCard", 2);
+        setRow(data.easternWildcard3, "wildCard", 3);
+        setRow(data.easternWildcard4, "wildCard", 4);
+        setRow(data.easternWildcard5, "wildCard", 5);
+        setRow(data.easternWildcard6, "wildCard", 6);
+        setRow(data.easternWildcard7, "wildCard", 7);
+        setRow(data.easternWildcard8, "wildCard", 8);
+        setRow(data.easternWildcard9, "wildCard", 9);
+        setRow(data.easternWildcard10, "wildCard", 10);
+    }
 }
 
 

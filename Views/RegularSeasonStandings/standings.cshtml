@@ -1,0 +1,83 @@
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Conference"] Conference Standings</title>
+    <link rel="stylesheet" type="text/css" href="/css/regularSeason.css" />
+</head>
+<body>
+    @if((string?)ViewData["Conference"] == "Western")
+    {
+        <div id="centralDivision" class="topThreeInDivision">
+                @for(int i=1; i<=3; i++)
+                {
+                    <div class="central@(i) teamDiv">
+                        <img class="logo" />
+                        <h1  class="name"></h1>
+                        <h1  class="clinchIndicator"></h1>
+                        <h1  class="gamesPlayed"></h1>
+                        <h1  class="points"></h1>
+                    </div>
+                }
+            </div>
+
+            <div id="pacificDivision" class="topThreeInDivision">
+                @for(int i=1; i<=3; i++)
+                {
+                    <div class="pacific@(i) teamDiv">
+                        <img class="logo" />
+                        <h1  class="name"></h1>
+                        <h1  class="clinchIndicator"></h1>
+                        <h1  class="gamesPlayed"></h1>
+                        <h1  class="points"></h1>
+                    </div>
+                }
+            </div>
+    }
+    else
+    {
+        <div id="atlanticDivision" class="topThreeInDivision">
+            @for(int i=1; i<=3; i++)
+            {
+                <div class="atlantic@(i) teamDiv">
+                    <img class="logo" />
+                    <h1  class="name"></h1>
+                    <h1  class="clinchIndicator"></h1>
+                    <h1  class="gamesPlayed"></h1>
+                    <h1  class="points"></h1>
+                </div>
+            }
+        </div>
+
+        <div id="metropolitanDivision" class="topThreeInDivision">
+            @for(int i=1; i<=3; i++)
+            {
+                <div class="metropolitan@(i) teamDiv">
+                    <img class="logo" />
+                    <h1  class="name"></h1>
+                    <h1  class="clinchIndicator"></h1>
+                    <h1  class="gamesPlayed"></h1>
+                    <h1  class="points"></h1>
+                </div>
+            }
+        </div>
+    }
+    <div id="wildcard" class="wildcard">
+    @for(int i=1; i<=10; i++)
+    {
+        <div class="wildCard@(i) teamDiv">
+            <img class="logo" />
+            <h1  class="name"></h1>
+            <h1  class="clinchIndicator"></h1>
+            <h1  class="gamesPlayed"></h1>
+            <h1  class="points"></h1>
+        </div>
+    }
+    </div>
+    <script src="/js/regularSeason.js"> </script>
+</body>
+</html>
