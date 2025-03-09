@@ -1,25 +1,26 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc;
-using NSwag.AspNetCore;
+using NSwag.Annotations;
 using StaticApps.Models;
 
 namespace StaticApps.Controllers.Api.Standings;
 
 [ApiController]
 [Route("[controller]")]
-public class RegularSeasonStandingsApiController : ControllerBase
+public class RegularSeasonApiController : ControllerBase
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ILogger<RegularSeasonStandingsApiController> _logger;
+    private readonly ILogger<RegularSeasonApiController> _logger;
 
-    public RegularSeasonStandingsApiController(ILogger<RegularSeasonStandingsApiController> logger, IHttpClientFactory httpClientFactory)
+    public RegularSeasonApiController(ILogger<RegularSeasonApiController> logger, IHttpClientFactory httpClientFactory)
     {
         _logger = logger;
         _httpClientFactory = httpClientFactory;
     }
 
     [HttpGet]
+    [OpenApiTag("Standings")]
     [ProducesResponseType<RegularSeasonStandingsApiModel>(StatusCodes.Status200OK)]
     [ProducesResponseType<ProblemDetails>(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Get()
