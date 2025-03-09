@@ -22,7 +22,7 @@ public class CustomNamespaceRoutingConvention : IControllerModelConvention
             {
                 if (selector.AttributeRouteModel != null)
                 {
-                    output = $"api/{string.Join("/", namespaceSegments.Skip(3).Select(s => s.ToLowerInvariant()))}/{controller.ControllerName[..^3]}";
+                    output = $"api/{string.Join("/", namespaceSegments.Skip(3))}/{controller.ControllerName[..^3]}";
                     Console.WriteLine(output);
                     selector.AttributeRouteModel = new AttributeRouteModel(new RouteAttribute(output));
                 }
@@ -31,7 +31,7 @@ public class CustomNamespaceRoutingConvention : IControllerModelConvention
         // Everything outside the API namespace
         else
         {
-            var route = string.Join("/", namespaceSegments.Skip(2).Select(s => s.ToLowerInvariant()));
+            var route = string.Join("/", namespaceSegments.Skip(2));
             // If the controllerName is Home then skip adding the controller name to the route. This makes the Home controller the root controller.
             if (controller.ControllerName != "Home")
             {
