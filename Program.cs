@@ -42,6 +42,15 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseStatusCodePages(async context =>
+{
+    if (context.HttpContext.Response.StatusCode == 404)
+    {
+        context.HttpContext.Response.Redirect("/NotFound");
+    }
+    await Task.CompletedTask;
+});
+
 app.UseHttpsRedirection();
 app.UseRouting();
 
