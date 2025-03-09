@@ -2,13 +2,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace StaticApps.Controllers.Standings;
 
-public class RegularSeasonStandingsController : Controller
+public class RegularSeasonController : Controller
 {
-    private readonly ILogger<RegularSeasonStandingsController> _logger;
+    private readonly ILogger<RegularSeasonController> _logger;
 
-    public RegularSeasonStandingsController(ILogger<RegularSeasonStandingsController> logger)
+    public RegularSeasonController(ILogger<RegularSeasonController> logger)
     {
         _logger = logger;
+    }
+
+    public IActionResult Index()
+    {
+        return View();
     }
 
     public IActionResult Eastern()
