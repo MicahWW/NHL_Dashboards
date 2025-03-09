@@ -1,9 +1,10 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.AspNetCore;
 using StaticApps.Models;
 
-namespace StaticApps.Controllers;
+namespace StaticApps.Controllers.Api.Standings;
 
 [ApiController]
 [Route("[controller]")]

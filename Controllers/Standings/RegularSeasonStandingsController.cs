@@ -1,8 +1,6 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using StaticApps.Models;
 
-namespace StaticApps.Controllers;
+namespace StaticApps.Controllers.Standings;
 
 public class RegularSeasonStandingsController : Controller
 {

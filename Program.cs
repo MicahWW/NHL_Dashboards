@@ -5,11 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews( options =>
 {
-    options.Conventions.Add(new CustomRouteConvention());    
+    options.Conventions.Add(new CustomNamespaceRoutingConvention());
 }
 );
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApiDocument();
+builder.Services.AddOpenApiDocument(document =>
+    document.OperationProcessors.Add(new CustomOperationProcessor("StaticApps.Controllers.Api"))
+);
 builder.Services.AddHttpClient(
     "NhlApi",
     client =>

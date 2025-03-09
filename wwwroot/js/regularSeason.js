@@ -1,5 +1,5 @@
 // The URL to get the Standings data from
-let requestURL = "/api/RegularSeasonStandings"
+let requestURL = "/api/standings/RegularSeasonStandings"
 const searchParams = new URLSearchParams(document.location.search);
 
 // The logo link and team colors
