@@ -31,4 +31,5 @@ public class NhlRegularSeasonStandings
     public int WildcardSequence { get; set; }
     public int DivisionSequence { get; set; }
     public required string DivisionName { get; set; }
+    public string ClinchIndicator { get; set; } = string.Empty;
 }

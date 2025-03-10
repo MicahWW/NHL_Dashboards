@@ -102,7 +102,8 @@ public class RegularSeasonApiController : ControllerBase
                             Points = standing.Points,
                             GamesPlayed = standing.GamesPlayed,
                             Name = standing.TeamCommonName,
-                            Abbr = standing.TeamAbbrev
+                            Abbr = standing.TeamAbbrev,
+                            ClinchIndicator = standing.ClinchIndicator
                         };
 
                         switch (standing)
