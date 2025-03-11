@@ -33,4 +33,9 @@ public class HomeController : Controller
     {
         return View("NotFound");
     }
+
+    public IActionResult PlayGround()
+    {
+        return View();
+    }
 }

@@ -1,0 +1,85 @@
+:root {
+    --primaryColor: red;
+    --secondaryColor: yellow;
+}
+
+body {
+    /* Position/Size settings */
+    position: relative;
+    left: 1vw;
+    top: 1vh;
+    width: 98vw;
+    height: 98vh;
+    margin: 0px;
+    /* Font settings */
+    font-family: "Black Ops One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+    /* Flex settings */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    background-color: darkgray;
+    /* outline: 2px solid white; */ /* CSS help */
+}
+
+#title {
+    height: 12%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* outline: 2px solid var(--primaryColor); */ /* CSS help */
+}
+
+#title > img {
+    height: 100%;
+    max-width: 40%;
+    object-fit: contain;
+}
+
+#title > div {
+    max-height: 100%;
+}
+
+#playoff-teams, #outside-teams {
+    outline: 2px solid var(--secondaryColor); /* CSS help */
+}
+
+.centered-text {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    text-align: center; /* Ensures multiline text is centered horizontally */
+}
+
+.team-div {
+    height: 8vh;
+    width: 70%;
+    outline: 0.2vw solid var(--primaryColor); /* CSS help */
+    border-radius: .5vw;
+}
+
+#playoff-teams, #outside-teams {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+#top-division, #bot-division, #wildcards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+#top-division, #bot-division {
+    flex-grow: 3;
+}
+#wildcards {
+    flex-grow: 2;
+}
+
+#top-division, #wildcards {
+    background-color: blue;
+}
