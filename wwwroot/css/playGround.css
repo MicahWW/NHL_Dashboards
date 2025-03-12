@@ -1,6 +1,7 @@
 :root {
-    --primaryColor: red;
-    --secondaryColor: yellow;
+    --primaryColor: lightblue;
+    --secondaryColor: lightgreen;
+    --rootTeamDivSize: 25%;
 }
 
 body {
@@ -21,7 +22,7 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     
-    background-color: darkgray;
+    background-color: black;
     /* outline: 2px solid white; */ /* CSS help */
 }
 
@@ -30,7 +31,6 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    /* outline: 2px solid var(--primaryColor); */ /* CSS help */
 }
 
 #title > img {
@@ -40,31 +40,33 @@ body {
 }
 
 #title > div {
-    max-height: 100%;
+    height: 100%;
 }
 
-#playoff-teams, #outside-teams {
-    outline: 2px solid var(--secondaryColor); /* CSS help */
+.standing-section-horizontal {
+    height: 88%;
+    width: 50%;
 }
 
-.centered-text {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    text-align: center; /* Ensures multiline text is centered horizontally */
+.standing-section-vertical {
+    height: 44%;
+    width: 100%;    
 }
 
-.team-div {
-    height: 8vh;
-    width: 70%;
-    outline: 0.2vw solid var(--primaryColor); /* CSS help */
-    border-radius: .5vw;
+#playoff-teams {
+    background-color: var(--primaryColor);
 }
 
-#playoff-teams, #outside-teams {
+#outside-teams {
+    background-color: var(--secondaryColor);
+}
+
+.teams {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    width: 70%;
+    height: 100%;
 }
 
 #top-division, #bot-division, #wildcards {
@@ -80,6 +82,49 @@ body {
     flex-grow: 2;
 }
 
-#top-division, #wildcards {
-    background-color: blue;
+.team-div > *, .team-info > * {
+    margin: 0px;
+
+}
+
+#top-division > .team-div, #bot-division > .team-div {
+    height: var(--rootTeamDivSize);
+}
+
+#wildcards > .team-div {
+    height: calc(1.5 * var(--rootTeamDivSize));
+}
+
+.teams > .team-div {
+    height: calc(var(--rootTeamDivSize) * 3 / 8);
+}
+
+
+.team-div {
+    outline: 0.2vw solid darkblue; /* CSS help */
+    border-radius: .5vw;
+    display: flex;
+    align-items: center;
+}
+
+.team-info {
+    height: 100%;
+    width: 75%;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    max-height: 96%;
+    max-width: 25%;
+    object-fit: contain;
+}
+
+.clinchIndicator {
+    width: 6%;
+    text-align: right;
+}
+
+.gamesPlayed, .points {
+    width: 12.5%;
 }

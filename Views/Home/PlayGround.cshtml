@@ -25,57 +25,55 @@
         <div class="centered-text resize-text">@ConferenceName Conference Standings</div>
     </div>
 
-    <div id="playoff-teams">
-        @{
-            string[] divs = ["top-division", "bot-division", "wildcards"];
-            foreach(var div in divs)
-            {
-                int max = div != "wildcards" ? 3 : 2;
-                <div id="@div">
-                    @for(int i=1; i<=max; i++) {
-                        <div id="@i" class="team-div">
-                            @* <img class="logo" />
-                            <h1  class="name"></h1>
-                            <h1  class="clinchIndicator"></h1>
-                            <h1  class="gamesPlayed"></h1>
-                            <h1  class="points"></h1> *@
-                        </div>
-                    }
+    <div id="playoff-teams" class="standing-section standing-section-vertical">
+        <div class="teams">
+            @{
+                string[] divs = ["top-division", "bot-division", "wildcards"];
+                foreach(var div in divs)
+                {
+                    int max = div != "wildcards" ? 3 : 2;
+                    <div id="@div">
+                        @for(int i=1; i<=max; i++) {
+                            <div id="@i" class="team-div">
+                                <div class="team-info">
+                                    <img class="logo" src="https://assets.nhle.com/logos/nhl/svg/DAL_light.svg"/>
+                                    <h1  class="name resize-text">Dallas Stars</h1>
+                                    <h1  class="clinchIndicator resize-text">x</h1>
+                                </div>
+                                <h1  class="gamesPlayed resize-text">82</h1>
+                                <h1  class="points resize-text">108</h1>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div id="outside-teams" class="standing-section standing-section-vertical">
+        <div class="teams">
+            @for(int i=9; i<=16; i++) {
+                <div id="@i" class="team-div">
+                    @* <img class="logo" />
+                    <h1  class="name"></h1>
+                    <h1  class="clinchIndicator"></h1>
+                    <h1  class="gamesPlayed"></h1>
+                    <h1  class="points"></h1> *@
                 </div>
             }
-        }
-        @* <div id="top-division"></div>
-        <div id="bot-division"></div>
-        <div id="wildcards"></div> *@
-    </div>
-    <div id="outside-teams">
-        @for(int i=9; i<=16; i++) {
-            <div id="@i" class="team-div">
-                @* <img class="logo" />
-                <h1  class="name"></h1>
-                <h1  class="clinchIndicator"></h1>
-                <h1  class="gamesPlayed"></h1>
-                <h1  class="points"></h1> *@
-            </div>
-        }
+        </div>
     </div>
 
     <script>
         function resizeTeams() {
+            let teamSections = document.getElementsByClassName("standing-section");
             if (window.innerHeight / window.innerWidth > 1) {
-                document.getElementById("dynamicStyle").innerHTML = `
-                    #playoff-teams, #outside-teams {
-                        height: 44%;
-                        width: 100%;
-                    }
-                `;
+                for(let i=0; i<teamSections.length; i++) {
+                    teamSections[i].classList.replace("standing-section-horizontal", "standing-section-vertical");
+                }
             } else {
-                document.getElementById("dynamicStyle").innerHTML = `
-                    #playoff-teams, #outside-teams {
-                        height: 88%;
-                        width: 50%;
-                    }
-                `;
+                for(let i=0; i<teamSections.length; i++) {
+                    teamSections[i].classList.replace("standing-section-vertical", "standing-section-horizontal");
+                }
             }
         }
 
