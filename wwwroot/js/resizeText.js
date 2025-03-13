@@ -2,6 +2,10 @@ function resizeText() {
     const resizeElements = document.getElementsByClassName("resize-text");
 
     for (let i = 0; i < resizeElements.length; i++) {
+        // Without this if there is an empty element the page will stuck in a loop
+        if (resizeElements[i].innerHTML == "") {
+            continue;
+        }
         const maxHeight = resizeElements[i].clientHeight;
         const maxWidth = resizeElements[i].clientWidth;
         let fontSize = 1;
@@ -18,6 +22,10 @@ function resizeTextToFitHeight() {
     const resizeElements = document.getElementsByClassName("resize-text-height");
 
     for (let i = 0; i < resizeElements.length; i++) {
+        // Without this if there is an empty element the page will stuck in a loop
+        if (resizeElements[i].innerHTML == "") {
+            continue;
+        }
         const maxHeight = resizeElements[i].clientHeight;
         let fontSize = 1;
         resizeElements[i].style.fontSize = fontSize + "px";
