@@ -110,8 +110,9 @@ body {
 }
 
 .name {
-    max-width: 69%;
-    max-height: 100%;
+    width: 69%;
+    height: 100%;
+    align-content: center;
 }
 
 .logo {
@@ -120,13 +121,15 @@ body {
     object-fit: contain;
 }
 
-.clinchIndicator {
+.clinch-indicator {
     width: 6%;
-    text-align: right;
+    height: 60%;
+    text-align: left;
 }
 
-.gamesPlayed, .points {
+.games-played, .points {
     width: 15%;
-    display: flex;
-    justify-content: center;
+    height: 60%;
+    align-content: center;
+    text-align: center;
 }

@@ -22,7 +22,7 @@
 <body>
     <div id="title">
         <img src="/images/@(ConferenceName)ConferenceLogo.png">
-        <div class="centered-text resize-text">@ConferenceName Conference Standings</div>
+        <div class="resize-text-height">@ConferenceName Conference Standings</div>
     </div>
 
     <div id="playoff-teams" class="standing-section standing-section-vertical">
@@ -31,16 +31,16 @@
                 foreach(var div in divs)
                 {
                     int max = div != "wildcards" ? 3 : 2;
-                <div id="@div" class="teams">
+                    <div id="@div" class="teams">
                         @for(int i=1; i<=max; i++) {
                             <div id="@i" class="team-div">
                                 <div class="team-info">
                                     <img class="logo" src="https://assets.nhle.com/logos/nhl/svg/DAL_light.svg"/>
-                                    <h1  class="name resize-text">Dallas Stars</h1>
-                                    <h1  class="clinchIndicator resize-text">x</h1>
+                                    <div class="clinch-indicator resize-text">x</div>
+                                    <div class="name resize-text">Dallas Stars</div>
                                 </div>
-                                <h1  class="gamesPlayed resize-text">82</h1>
-                                <h1  class="points resize-text">108</h1>
+                                <div class="games-played resize-text">82</div>
+                                <div class="points resize-text">108</div>
                             </div>
                         }
                     </div>
@@ -51,11 +51,6 @@
         <div class="teams">
             @for(int i=9; i<=16; i++) {
                 <div id="@i" class="team-div">
-                    @* <img class="logo" />
-                    <h1  class="name"></h1>
-                    <h1  class="clinchIndicator"></h1>
-                    <h1  class="gamesPlayed"></h1>
-                    <h1  class="points"></h1> *@
                 </div>
             }
         </div>
@@ -78,6 +73,7 @@
         function resizeAll() {
             resizeTeams();
             resizeText();
+            resizeTextToFitHeight();
         }
         window.onload = resizeAll;
         window.onresize = resizeAll;
