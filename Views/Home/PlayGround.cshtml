@@ -26,32 +26,34 @@
     </div>
 
     <div id="playoff-teams" class="standing-section standing-section-vertical">
-            @{
-                string[] divs = ["top-division", "bot-division", "wildcards"];
-                foreach(var div in divs)
-                {
-                    int max = div != "wildcards" ? 3 : 2;
-                    <div id="@div" class="teams">
-                        @for(int i=1; i<=max; i++) {
-                            <div class="standing-row">
-                                <div class="standing-number resize-text">@i</div>
-                                <div id="@i" class="team-div">
-                                    <div class="team-info">
-                                        <img class="logo" src="https://assets.nhle.com/logos/nhl/svg/DAL_light.svg"/>
-                                        <div class="clinch-indicator resize-text">x</div>
-                                        <div class="name resize-text">Dallas Stars</div>
-                                    </div>
-                                    <div class="games-played resize-text">82</div>
-                                    <div class="points resize-text">108</div>
+        @{
+            string[] divs = ["top-division", "bot-division", "wildcards"];
+            foreach (var div in divs)
+            {
+                int max = div != "wildcards" ? 3 : 2;
+                <div id="@div" class="teams">
+                    @for (int i = 1; i <= max; i++)
+                    {
+                        <div class="standing-row">
+                            <div class="standing-number resize-text">@i</div>
+                            <div id="@i" class="team-div">
+                                <div class="team-info">
+                                    <img class="logo" src="https://assets.nhle.com/logos/nhl/svg/DAL_light.svg" />
+                                    <div class="clinch-indicator resize-text">x</div>
+                                    <div class="name resize-text">Dallas Stars</div>
                                 </div>
+                                <div class="games-played resize-text">82</div>
+                                <div class="points resize-text">108</div>
                             </div>
-                        }
-                    </div>
-                }
+                        </div>
+                    }
+                </div>
             }
+        }
     </div>
     <div id="outside-teams" class="standing-section standing-section-vertical teams">
-        @for(int i=9; i<=16; i++) {
+        @for (int i = 9; i <= 16; i++)
+        {
             <div class="standing-row">
                 <div class="standing-number resize-text">@i</div>
                 <div id="@i" class="team-div"></div>
@@ -63,11 +65,11 @@
         function resizeTeams() {
             let teamSections = document.getElementsByClassName("standing-section");
             if (window.innerHeight / window.innerWidth > 1) {
-                for(let i=0; i<teamSections.length; i++) {
+                for (let i = 0; i < teamSections.length; i++) {
                     teamSections[i].classList.replace("standing-section-horizontal", "standing-section-vertical");
                 }
             } else {
-                for(let i=0; i<teamSections.length; i++) {
+                for (let i = 0; i < teamSections.length; i++) {
                     teamSections[i].classList.replace("standing-section-vertical", "standing-section-horizontal");
                 }
             }

@@ -21,9 +21,8 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    
+
     background-color: black;
-    /* outline: 2px solid white; */ /* CSS help */
 }
 
 #title {
@@ -33,13 +32,13 @@ body {
     justify-content: space-between;
 }
 
-#title > img {
+#title>img {
     height: 100%;
     max-width: 40%;
     object-fit: contain;
 }
 
-#title > div {
+#title>div {
     height: 100%;
 }
 
@@ -50,7 +49,7 @@ body {
 
 .standing-section-vertical {
     height: 44%;
-    width: 100%;    
+    width: 100%;
 }
 
 #playoff-teams {
@@ -67,7 +66,8 @@ body {
     flex-direction: column;
 }
 
-#top-division, #bot-division {
+#top-division,
+#bot-division {
     height: 37.5%;
 }
 
@@ -76,7 +76,6 @@ body {
 }
 
 .standing-row {
-    height: 100%;
     width: 80%;
     display: flex;
 }
@@ -87,20 +86,22 @@ body {
     align-content: center;
 }
 
-.team-div > *, .team-info > * {
+.team-div>*,
+.team-info>* {
     margin: 0px;
 
 }
 
-#top-division > .standing-row, #bot-division > .standing-row {
+#top-division>.standing-row,
+#bot-division>.standing-row {
     height: calc(var(--rootTeamDivSize) * 8 / 3);
 }
 
-#wildcards > .standing-row {
+#wildcards>.standing-row {
     height: calc(var(--rootTeamDivSize) * 8 / 2);
 }
 
-#outside-teams > .standing-row {
+#outside-teams>.standing-row {
     height: var(--rootTeamDivSize);
 }
 
@@ -140,7 +141,8 @@ body {
     text-align: left;
 }
 
-.games-played, .points {
+.games-played,
+.points {
     width: 15%;
     height: 60%;
     align-content: center;
