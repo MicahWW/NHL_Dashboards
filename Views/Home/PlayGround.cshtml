@@ -26,13 +26,12 @@
     </div>
 
     <div id="playoff-teams" class="standing-section standing-section-vertical">
-        <div class="teams">
             @{
                 string[] divs = ["top-division", "bot-division", "wildcards"];
                 foreach(var div in divs)
                 {
                     int max = div != "wildcards" ? 3 : 2;
-                    <div id="@div">
+                <div id="@div" class="teams">
                         @for(int i=1; i<=max; i++) {
                             <div id="@i" class="team-div">
                                 <div class="team-info">
@@ -47,7 +46,6 @@
                     </div>
                 }
             }
-        </div>
     </div>
     <div id="outside-teams" class="standing-section standing-section-vertical">
         <div class="teams">

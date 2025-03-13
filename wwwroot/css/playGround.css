@@ -63,24 +63,18 @@ body {
 
 .teams {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: column;
     width: 70%;
     height: 100%;
 }
 
-#top-division, #bot-division, #wildcards {
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-}
-
 #top-division, #bot-division {
-    flex-grow: 3;
+    height: 37.5%;
 }
 
 #wildcards {
-    flex-grow: 2;
+    height: 25%;
 }
 
 .team-div > *, .team-info > * {
