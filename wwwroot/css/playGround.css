@@ -1,7 +1,7 @@
 :root {
     --primaryColor: lightblue;
     --secondaryColor: lightgreen;
-    --rootTeamDivSize: 25%;
+    --rootTeamDivSize: 10%;
 }
 
 body {
@@ -78,6 +78,7 @@ body {
 #top-division, #bot-division {
     flex-grow: 3;
 }
+
 #wildcards {
     flex-grow: 2;
 }
@@ -88,15 +89,15 @@ body {
 }
 
 #top-division > .team-div, #bot-division > .team-div {
-    height: var(--rootTeamDivSize);
+    height: calc(var(--rootTeamDivSize) * 8 / 3);
 }
 
 #wildcards > .team-div {
-    height: calc(1.5 * var(--rootTeamDivSize));
+    height: calc(var(--rootTeamDivSize) * 8 / 2);
 }
 
 .teams > .team-div {
-    height: calc(var(--rootTeamDivSize) * 3 / 8);
+    height: var(--rootTeamDivSize);
 }
 
 
