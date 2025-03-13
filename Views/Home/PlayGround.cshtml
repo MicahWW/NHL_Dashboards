@@ -33,27 +33,30 @@
                     int max = div != "wildcards" ? 3 : 2;
                     <div id="@div" class="teams">
                         @for(int i=1; i<=max; i++) {
-                            <div id="@i" class="team-div">
-                                <div class="team-info">
-                                    <img class="logo" src="https://assets.nhle.com/logos/nhl/svg/DAL_light.svg"/>
-                                    <div class="clinch-indicator resize-text">x</div>
-                                    <div class="name resize-text">Dallas Stars</div>
+                            <div class="standing-row">
+                                <div class="standing-number resize-text">@i</div>
+                                <div id="@i" class="team-div">
+                                    <div class="team-info">
+                                        <img class="logo" src="https://assets.nhle.com/logos/nhl/svg/DAL_light.svg"/>
+                                        <div class="clinch-indicator resize-text">x</div>
+                                        <div class="name resize-text">Dallas Stars</div>
+                                    </div>
+                                    <div class="games-played resize-text">82</div>
+                                    <div class="points resize-text">108</div>
                                 </div>
-                                <div class="games-played resize-text">82</div>
-                                <div class="points resize-text">108</div>
                             </div>
                         }
                     </div>
                 }
             }
     </div>
-    <div id="outside-teams" class="standing-section standing-section-vertical">
-        <div class="teams">
-            @for(int i=9; i<=16; i++) {
-                <div id="@i" class="team-div">
-                </div>
-            }
-        </div>
+    <div id="outside-teams" class="standing-section standing-section-vertical teams">
+        @for(int i=9; i<=16; i++) {
+            <div class="standing-row">
+                <div class="standing-number resize-text">@i</div>
+                <div id="@i" class="team-div"></div>
+            </div>
+        }
     </div>
 
     <script>

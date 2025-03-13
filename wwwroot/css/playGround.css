@@ -65,8 +65,6 @@ body {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    width: 70%;
-    height: 100%;
 }
 
 #top-division, #bot-division {
@@ -77,27 +75,42 @@ body {
     height: 25%;
 }
 
+.standing-row {
+    height: 100%;
+    width: 80%;
+    display: flex;
+}
+
+.standing-number {
+    width: 10%;
+    text-align: right;
+    align-content: center;
+}
+
 .team-div > *, .team-info > * {
     margin: 0px;
 
 }
 
-#top-division > .team-div, #bot-division > .team-div {
+#top-division > .standing-row, #bot-division > .standing-row {
     height: calc(var(--rootTeamDivSize) * 8 / 3);
 }
 
-#wildcards > .team-div {
+#wildcards > .standing-row {
     height: calc(var(--rootTeamDivSize) * 8 / 2);
 }
 
-.teams > .team-div {
+#outside-teams > .standing-row {
     height: var(--rootTeamDivSize);
 }
 
+.standing-row {
+    outline: 0.2vw solid darkblue; /* CSS help */
+    border-radius: .5vw; /* CSS help */
+}
 
 .team-div {
-    outline: 0.2vw solid darkblue; /* CSS help */
-    border-radius: .5vw;
+    width: 90%;
     display: flex;
     align-items: center;
 }
