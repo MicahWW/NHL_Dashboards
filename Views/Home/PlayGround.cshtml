@@ -1,8 +1,18 @@
 @{
     Layout = "";
-    string ConferenceName = "Western";
-    @* string topDivisionName = "central";
-    string botDivisionName = "pacific"; *@
+    string ConferenceName = (string)ViewData["Conference"]!;
+    string TopDivisionName = string.Empty;
+    string BotDivisionName = string.Empty;
+    if (ConferenceName.Equals("Western"))
+    {
+        TopDivisionName = "Central";
+        BotDivisionName = "Pacific";
+    }
+    else
+    {
+        TopDivisionName = "Atlantic";
+        BotDivisionName = "Metropolitan";
+    }
 }
 
 <!DOCTYPE html>
@@ -16,6 +26,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
     <script src="/js/resizeText.js"></script>
+    <script src="/js/playGround.js"></script>
     <style id="dynamicStyle"></style>
 </head>
 
@@ -38,12 +49,12 @@
                             <div class="standing-number resize-text">@i</div>
                             <div id="@i" class="team-div">
                                 <div class="team-info">
-                                    <img class="logo" src="https://assets.nhle.com/logos/nhl/svg/DAL_light.svg" />
-                                    <div class="clinch-indicator resize-text">x</div>
-                                    <div class="name resize-text">Dallas Stars</div>
+                                    <img class="logo" />
+                                    <div class="clinch-indicator resize-text"></div>
+                                    <div class="name resize-text"></div>
                                 </div>
-                                <div class="games-played resize-text">82</div>
-                                <div class="points resize-text">108</div>
+                                <div class="games-played resize-text"></div>
+                                <div class="points resize-text"></div>
                             </div>
                         </div>
                     }
@@ -56,7 +67,15 @@
         {
             <div class="standing-row">
                 <div class="standing-number resize-text">@i</div>
-                <div id="@i" class="team-div"></div>
+                <div id="@i" class="team-div">
+                    <div class="team-info">
+                        <img class="logo" />
+                        <div class="clinch-indicator resize-text"></div>
+                        <div class="name resize-text"></div>
+                    </div>
+                    <div class="games-played resize-text"></div>
+                    <div class="points resize-text"></div>
+                </div>
             </div>
         }
     </div>
@@ -80,7 +99,15 @@
             resizeText();
             resizeTextToFitHeight();
         }
-        window.onload = resizeAll;
+
+        const reloadData = async () => {
+            console.log("loading data");
+            await getData("@TopDivisionName", "@BotDivisionName", "@ConferenceName");
+            resizeAll();
+        };
+
+        window.onload = reloadData;
         window.onresize = resizeAll;
+        setInterval(reloadData, 1800000);
     </script>
 </body>

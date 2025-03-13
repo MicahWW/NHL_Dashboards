@@ -36,6 +36,7 @@ public class HomeController : Controller
 
     public IActionResult PlayGround()
     {
+        ViewData["Conference"] = "Western";
         return View();
     }
 }
