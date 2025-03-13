@@ -110,9 +110,14 @@ body {
 
 .team-info {
     height: 100%;
-    width: 75%;
+    width: 70%;
     display: flex;
     align-items: center;
+}
+
+.name {
+    max-width: 69%;
+    max-height: 100%;
 }
 
 .logo {
@@ -127,5 +132,7 @@ body {
 }
 
 .gamesPlayed, .points {
-    width: 12.5%;
+    width: 15%;
+    display: flex;
+    justify-content: center;
 }
