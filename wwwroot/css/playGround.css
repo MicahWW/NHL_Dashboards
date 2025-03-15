@@ -34,21 +34,28 @@ body {
 
 #title>img {
     height: 100%;
-    max-width: 40%;
+    max-width: 10%;
     object-fit: contain;
 }
 
 #title>div {
     height: 100%;
+    max-width: 90%;
 }
 
 .standing-section-horizontal {
     height: 88%;
     width: 50%;
+    display: flex;
 }
 
 .standing-section-vertical {
     height: 44%;
+    width: 100%;
+    display: flex;
+}
+
+.standing-section {
     width: 100%;
 }
 
@@ -64,14 +71,34 @@ body {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
-#top-division,
-#bot-division {
+.standing-header-section {
+    width: 10%;
+    height: 100%;
+}
+
+.standing-header-section > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.standing-header {
+    writing-mode: vertical-rl;
+    rotate: 180deg;
+    max-height: 80%;
+    max-width: 100%;
+}
+
+.top-division,
+.bot-division {
     height: 37.5%;
 }
 
-#wildcards {
+.wildcards {
     height: 25%;
 }
 
@@ -82,6 +109,7 @@ body {
 
 .standing-number {
     width: 10%;
+    max-height: 100%;
     text-align: right;
     align-content: center;
 }
@@ -101,7 +129,7 @@ body {
     height: calc(var(--rootTeamDivSize) * 8 / 2);
 }
 
-#outside-teams>.standing-row {
+#outside-teams>.teams>.standing-row {
     height: var(--rootTeamDivSize);
 }
 
@@ -124,8 +152,8 @@ body {
 }
 
 .name {
-    width: 69%;
-    height: 100%;
+    max-width: 69%;
+    max-height: 100%;
     align-content: center;
 }
 
@@ -136,15 +164,15 @@ body {
 }
 
 .clinch-indicator {
-    width: 6%;
-    height: 60%;
+    max-width: 6%;
+    max-height: 60%;
     text-align: left;
 }
 
 .games-played,
 .points {
     width: 15%;
-    height: 60%;
+    max-height: 60%;
     align-content: center;
     text-align: center;
 }

@@ -1,18 +1,13 @@
 @{
     Layout = "";
     string ConferenceName = (string)ViewData["Conference"]!;
-    string TopDivisionName = string.Empty;
-    string BotDivisionName = string.Empty;
-    if (ConferenceName.Equals("Western"))
+    var PlayoffSections = new OrderedDictionary<string, string>()
     {
-        TopDivisionName = "Central";
-        BotDivisionName = "Pacific";
-    }
-    else
-    {
-        TopDivisionName = "Atlantic";
-        BotDivisionName = "Metropolitan";
-    }
+        {"top-division", ConferenceName.Equals("Western") ? "Central": "Atlantic"},
+        {"bot-division", ConferenceName.Equals("Western") ? "Pacific": "Metropolitan"},
+        {"wildcards", "Wildcards"}
+
+    };
 }
 
 <!DOCTYPE html>
@@ -33,16 +28,21 @@
 <body>
     <div id="title">
         <img src="/images/@(ConferenceName)ConferenceLogo.png">
-        <div class="resize-text-height">@ConferenceName Conference Standings</div>
+        <div class="resize-text">@ConferenceName Conference Standings</div>
     </div>
 
-    <div id="playoff-teams" class="standing-section standing-section-vertical">
-        @{
-            string[] divs = ["top-division", "bot-division", "wildcards"];
-            foreach (var div in divs)
+    <div id="playoff-teams" class="standing-section-vertical">
+        <div class="standing-header-section">
+            @foreach (var section in PlayoffSections)
+            {
+                <div class="@(section.Key)"><div class="standing-header resize-text">@(section.Value)</div></div>
+            }
+        </div>
+        <div class="standing-section">
+            @foreach (var div in PlayoffSections.Keys)
             {
                 int max = div != "wildcards" ? 3 : 2;
-                <div id="@div" class="teams">
+                <div id="@div" class="@div teams">
                     @for (int i = 1; i <= max; i++)
                     {
                         <div class="standing-row">
@@ -60,49 +60,58 @@
                     }
                 </div>
             }
-        }
+        </div>
     </div>
-    <div id="outside-teams" class="standing-section standing-section-vertical teams">
-        @for (int i = 9; i <= 16; i++)
-        {
-            <div class="standing-row">
-                <div class="standing-number resize-text">@i</div>
-                <div id="@i" class="team-div">
-                    <div class="team-info">
-                        <img class="logo" />
-                        <div class="clinch-indicator resize-text"></div>
-                        <div class="name resize-text"></div>
+    <div id="outside-teams" class="standing-section-vertical">
+        <div class="standing-header-section">
+            <div style="height: 100%; width: 100%;"><div class="standing-header resize-text">Wildcard Race</div></div>
+        </div>
+        <div class="standing-section teams">
+            @for (int i = 9; i <= 16; i++)
+            {
+                <div class="standing-row">
+                    <div class="standing-number resize-text">@i</div>
+                    <div id="@i" class="team-div">
+                        <div class="team-info">
+                            <img class="logo" />
+                            <div class="clinch-indicator resize-text"></div>
+                            <div class="name resize-text"></div>
+                        </div>
+                        <div class="games-played resize-text"></div>
+                        <div class="points resize-text"></div>
                     </div>
-                    <div class="games-played resize-text"></div>
-                    <div class="points resize-text"></div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 
     <script>
         function resizeTeams() {
-            let teamSections = document.getElementsByClassName("standing-section");
+            let oldClass = null;
+            let newClass = null;
+
             if (window.innerHeight / window.innerWidth > 1) {
-                for (let i = 0; i < teamSections.length; i++) {
-                    teamSections[i].classList.replace("standing-section-horizontal", "standing-section-vertical");
-                }
+                oldClass = "standing-section-horizontal";
+                newClass = "standing-section-vertical";
             } else {
-                for (let i = 0; i < teamSections.length; i++) {
-                    teamSections[i].classList.replace("standing-section-vertical", "standing-section-horizontal");
-                }
+                oldClass = "standing-section-vertical";
+                newClass = "standing-section-horizontal";
+            }
+
+            let standingSections = document.getElementsByClassName(oldClass);
+            // as class names are replaced the list of standingSections shortens so the length shortens
+            while (standingSections.length > 0) {
+                standingSections[0].classList.replace(oldClass, newClass);
             }
         }
 
         function resizeAll() {
             resizeTeams();
             resizeText();
-            resizeTextToFitHeight();
         }
 
         const reloadData = async () => {
-            console.log("loading data");
-            await getData("@TopDivisionName", "@BotDivisionName", "@ConferenceName");
+            await getData("@(PlayoffSections["top-division"])", "@(PlayoffSections["bot-division"])", "@ConferenceName");
             resizeAll();
         };
 
