@@ -19,12 +19,12 @@ public class RegularSeasonController : Controller
     public IActionResult Eastern()
     {
         ViewData["Conference"] = "Eastern";
-        return View("standings");
+        return View("Standings");
     }
 
     public IActionResult Western()
     {
         ViewData["Conference"] = "Western";
-        return View("standings");
+        return View("Standings");
     }
 }

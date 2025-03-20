@@ -33,10 +33,4 @@ public class HomeController : Controller
     {
         return View("NotFound");
     }
-
-    public IActionResult PlayGround()
-    {
-        ViewData["Conference"] = "Western";
-        return View();
-    }
 }
