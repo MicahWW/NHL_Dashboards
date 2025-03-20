@@ -23,7 +23,6 @@ public class CustomNamespaceRoutingConvention : IControllerModelConvention
                 if (selector.AttributeRouteModel != null)
                 {
                     output = $"Api/{string.Join("/", namespaceSegments.Skip(3))}/{controller.ControllerName[..^3]}";
-                    Console.WriteLine(output);
                     selector.AttributeRouteModel = new AttributeRouteModel(new RouteAttribute(output));
                 }
             }
@@ -46,7 +45,6 @@ public class CustomNamespaceRoutingConvention : IControllerModelConvention
                     {
                         output = $"{route}/{selector.AttributeRouteModel.Template}";
                         selector.AttributeRouteModel.Template = output;
-                        Console.WriteLine(output);
                     }
                     else
                     {
@@ -55,7 +53,6 @@ public class CustomNamespaceRoutingConvention : IControllerModelConvention
                         {
                             Template = output
                         };
-                        Console.WriteLine(output);
                     }
                 }
             }
