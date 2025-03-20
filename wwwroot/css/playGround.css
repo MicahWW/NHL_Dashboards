@@ -43,14 +43,6 @@ body {
     max-width: 90%;
 }
 
-#playoff-teams {
-    background-color: var(--primaryColor);
-}
-
-#outside-teams {
-    background-color: var(--secondaryColor);
-}
-
 .standing-section-horizontal,
 .standing-section-vertical {
     display: flex;
@@ -130,10 +122,10 @@ body {
     height: var(--rootTeamDivSize);
 }
 
-.standing-row {
-    outline: 0.2vw solid darkblue; /* CSS help */
-    border-radius: .5vw; /* CSS help */
-}
+/* .standing-row { */
+    /* outline: 0.2vw solid darkblue; CSS help */
+    /* border-radius: .5vw; CSS help */
+/* } */
 
 .standing-row {
     width: 90%;
