@@ -43,20 +43,36 @@ body {
     max-width: 90%;
 }
 
+.table-headers {
+    width: 100%;
+    height: 5%;
+    display: flex;
+}
+
+.table-headers>.standing-section>.standing-row {
+    height: 100%;
+}
+
+.standing-section-horizontal,
+.standing-section-vertical {
+    display: flex;
+    flex-wrap:  wrap;
+    justify-content: center;
+}
+
 .standing-section-horizontal {
     height: 88%;
     width: 50%;
-    display: flex;
 }
 
 .standing-section-vertical {
     height: 44%;
     width: 100%;
-    display: flex;
 }
 
 .standing-section {
-    width: 100%;
+    width: 90%;
+    height: 95%;
 }
 
 #playoff-teams {
@@ -76,7 +92,7 @@ body {
 
 .standing-header-section {
     width: 10%;
-    height: 100%;
+    height: 95%;
 }
 
 .standing-header-section > * {
@@ -95,15 +111,15 @@ body {
 
 .top-division,
 .bot-division {
-    height: 37.5%;
+    height: calc(3 / 8 * 100%);
 }
 
 .wildcards {
-    height: 25%;
+    height: calc(2 / 8 * 100%);
 }
 
 .standing-row {
-    width: 80%;
+    width: 90%;
     display: flex;
 }
 
@@ -164,7 +180,7 @@ body {
 }
 
 .clinch-indicator {
-    max-width: 6%;
+    width: 6%;
     max-height: 60%;
     text-align: left;
 }
