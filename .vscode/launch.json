@@ -6,10 +6,10 @@
     "configurations": [
     
         {
-            "name": "C#: StaticApps [http]",
+            "name": "C#: NHL_Dashboards [http]",
             "type": "dotnet",
             "request": "launch",
-            "projectPath": "${workspaceFolder}\\StaticApps.csproj",
+            "projectPath": "${workspaceFolder}\\NHL_Dashboards.csproj",
             "launchConfigurationId": "TargetFramework=;http"
         }
     ]

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
-namespace StaticApps.Conventions;
+namespace NHL_Dashboards.Conventions;
 
 public class CustomNamespaceRoutingConvention : IControllerModelConvention
 {

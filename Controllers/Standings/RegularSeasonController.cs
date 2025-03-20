@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace StaticApps.Controllers.Standings;
+namespace NHL_Dashboards.Controllers.Standings;
 
 public class RegularSeasonController : Controller
 {

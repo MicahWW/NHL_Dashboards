@@ -1,4 +1,4 @@
-namespace StaticApps.Models;
+namespace NHL_Dashboards.Models;
 
 public class RegularSeasonStandingsApiModel
 {

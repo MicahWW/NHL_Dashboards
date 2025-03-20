@@ -1,7 +1,7 @@
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Contexts;
 
-namespace StaticApps.Conventions;
+namespace NHL_Dashboards.Conventions;
 
 public class CustomOperationProcessor(string ns) : IOperationProcessor
 {

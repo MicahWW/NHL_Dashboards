@@ -1,4 +1,4 @@
-using StaticApps.Conventions;
+using NHL_Dashboards.Conventions;
 
 #region Configure Services
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews(options =>
 });
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApiDocument(document =>
-    document.OperationProcessors.Add(new CustomOperationProcessor("StaticApps.Controllers.Api"))
+    document.OperationProcessors.Add(new CustomOperationProcessor("NHL_Dashboards.Controllers.Api"))
 );
 builder.Services.AddHttpClient(
     "NhlApi",

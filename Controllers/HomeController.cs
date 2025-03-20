@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using StaticApps.Models;
+using NHL_Dashboards.Models;
 
-namespace StaticApps.Controllers;
+namespace NHL_Dashboards.Controllers;
 
 public class HomeController : Controller
 {

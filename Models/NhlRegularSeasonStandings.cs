@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace StaticApps.Models;
+namespace NHL_Dashboards.Models;
 
 public class NhlRegularSeasonStandings
 {

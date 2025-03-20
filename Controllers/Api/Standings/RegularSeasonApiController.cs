@@ -2,9 +2,9 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
-using StaticApps.Models;
+using NHL_Dashboards.Models;
 
-namespace StaticApps.Controllers.Api.Standings;
+namespace NHL_Dashboards.Controllers.Api.Standings;
 
 [ApiController]
 [Route("[controller]")]

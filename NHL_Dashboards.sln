@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticApps", "StaticApps.csproj", "{AE0E714B-972A-5365-9E18-03A58EDE36DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHL_Dashboards", "NHL_Dashboards.csproj", "{AE0E714B-972A-5365-9E18-03A58EDE36DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
