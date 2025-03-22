@@ -28,12 +28,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseOpenApi();
-    app.UseSwaggerUi();
-    app.UseReDoc(options => options.Path = "/redoc");
-}
+app.UseOpenApi();
+app.UseSwaggerUi();
+app.UseReDoc(options => options.Path = "/redoc");
 
 app.UseStatusCodePages(async context =>
 {
