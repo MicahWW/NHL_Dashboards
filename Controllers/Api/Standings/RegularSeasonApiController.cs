@@ -1,8 +1,7 @@
-using System.Text.Json;
-using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using NHL_Dashboards.Models;
+using NHL_Dashboards.Services;
 
 namespace NHL_Dashboards.Controllers.Api.Standings;
 
@@ -23,88 +22,30 @@ public class RegularSeasonApiController : ControllerBase
     [OpenApiTag("Standings")]
     [ProducesResponseType<RegularSeasonStandingsApiModel>(StatusCodes.Status200OK)]
     [ProducesResponseType<ProblemDetails>(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get([FromQuery] string date = "")
     {
         var httpClient = _httpClientFactory.CreateClient("NhlApi");
-        string standingsEnd = string.Empty;
+        NhlRegularSeasonStandings Standings;
 
-        // gets the latest allowed value for standings requests
-        using (var response = await httpClient.GetAsync("v1/standings-season"))
+        try
         {
-            if (response.IsSuccessStatusCode)
-            {
-                using var contentStream = await response.Content.ReadAsStreamAsync();
-                var json = JsonSerializer.Deserialize<JsonNode>(contentStream);
-                if (json != null && json["seasons"] != null && json["seasons"] is JsonArray)
-                {
-                    int last = ((JsonArray)json["seasons"]!).Count - 1;
-                    standingsEnd = (string?)json!["seasons"]![last]!["standingsEnd"] ?? string.Empty;
-                    if (string.IsNullOrEmpty(standingsEnd))
-                    {
-                        return Problem(
-                            detail: "The value on standingsEnd was empty or non existent.",
-                            statusCode: 500,
-                            title: "Reading standingsEnd"
-                        );
-                    }
-                }
-                else
-                {
-                    return Problem(
-                        detail: "The results from standings-season was empty or non existent.",
-                        statusCode: 500,
-                        title: "Reading standings-season"
-                    );
-                }
-            }
-            else
-            {
-                return Problem(
-                    detail: $"Invalid status code when retrieving standings-season, code received: {(int)response.StatusCode}",
-                    statusCode: 500,
-                    title: "Requesting standings-season"
-                );
-            }
+            Standings = await NhlApi.GetRegularSeasonStandings(httpClient, date);
         }
-
-        // gets the latest data from the standings
-        var Path = $"v1/standings/{standingsEnd}";
-        using (var response = await httpClient.GetAsync(Path))
-        {
-            if(response.IsSuccessStatusCode)
-            {
-
-                using var contentStream = await response.Content.ReadAsStreamAsync();
-                var json = JsonSerializer.Deserialize<JsonNode>(contentStream);
-                if (json != null && json["standings"] != null && json["standings"] is JsonArray)
-                {
-                    var output = new RegularSeasonStandingsApiModel();
-                    var standings = JsonSerializer.Deserialize<List<NhlRegularSeasonStandings>>(json["standings"], new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-
-                    if (standings == null)
+        catch (Exception ex)
                     {
                         return Problem
                         (
-                            detail: "Deserializing the standings failed",
-                            statusCode: 500,
-                            title: "Deserialize standings"
-                        );
-                    }
+                title: "Getting Standings data from NHL",
+                detail: ex.Message,
+                statusCode: 500
+            );
+        }
+        var output = new RegularSeasonStandingsApiModel();
 
                     // iterate through standings and assign to the appropriate position
-                    foreach (var standing in standings)
+        foreach (var standing in Standings.Standings)
                     {
-                        var teamData = new RegularSeasonStandingsApiModel.TeamData
-                        {
-                            Points = standing.Points,
-                            GamesPlayed = standing.GamesPlayed,
-                            Name = standing.TeamCommonName,
-                            Abbr = standing.TeamAbbrev,
-                            ClinchIndicator = standing.ClinchIndicator
-                        };
+            var teamData = new RegularSeasonStandingsApiModel.TeamData(standing);
 
                         switch (standing)
                         {
@@ -208,24 +149,5 @@ public class RegularSeasonApiController : ControllerBase
                     }
 
                     return Ok(output);
-                }
-                else
-                {
-                    return Problem(
-                        detail: "The standings result has empty",
-                        statusCode: 500,
-                        title: "Reading standings"
-                    );
-                }
-            }
-            else
-            {
-                return Problem(
-                    detail: $"Invalid status code when retrieving standings, code received: {(int)response.StatusCode}; path called {Path}",
-                    statusCode: 500,
-                    title: "Requesting standings"
-                );
-            }
-        }
     }
 }
