@@ -11,4 +11,9 @@
     <PackageReference Include="NSwag.AspNetCore" Version="14.2.0" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn> <!-- Suppress missing XML comment warnings -->
+  </PropertyGroup>
+
 </Project>
