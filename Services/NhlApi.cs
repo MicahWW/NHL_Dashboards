@@ -11,7 +11,13 @@ public static class NhlApi
     };
 
 
-    public static async Task<NhlStandingsSeason> GetStandingsSeason(HttpClient httpClient)
+    /// <summary>
+    /// Grabs data from the NHL standings-season endpoint
+    /// </summary>
+    /// <param name="httpClient">A httpClient setup with the NHL API base URL</param>
+    /// <returns>Formatted data from the standings-season endpoint</returns>
+    /// <exception cref="Exception"></exception>
+    public static async Task<NhlStandingsSeason> GetStandingsSeasonAsync(HttpClient httpClient)
     {
         using var response = await httpClient.GetAsync("v1/standings-season");
         if (!response.IsSuccessStatusCode)
@@ -26,12 +32,18 @@ public static class NhlApi
             throw new Exception("After deserializing standings-season data the data was null.");
     }
 
-    // passing a date is not required, if it is not passed then it will grab the latest date possible
-    public static async Task<NhlRegularSeasonStandings> GetRegularSeasonStandings(HttpClient httpClient, string date = "")
+    /// <summary>
+    /// Grabs data from the NHL standings endpoint.
+    /// </summary>
+    /// <param name="httpClient">A httpClient setup with the NHL API base URL</param>
+    /// <param name="date">What date to get the standings from, if not passed grab the latest date possible</param>
+    /// <returns>Formatted ata from the standings endpoint at the specified date</returns>
+    /// <exception cref="Exception"></exception>
+    public static async Task<NhlRegularSeasonStandings> GetRegularSeasonStandingsAsync(HttpClient httpClient, string date = "")
     {
         if (string.IsNullOrEmpty(date))
         {
-            var StandingsSeason = await GetStandingsSeason(httpClient);
+            var StandingsSeason = await GetStandingsSeasonAsync(httpClient);
             date = StandingsSeason!.Seasons[^1].StandingsEnd;
         }
         else {

@@ -38,7 +38,7 @@ public class RegularSeasonApiController : ControllerBase
 
         try
         {
-            Standings = await NhlApi.GetRegularSeasonStandings(httpClient, date);
+            Standings = await NhlApi.GetRegularSeasonStandingsAsync(httpClient, date);
         }
         catch (Exception ex)
         {
