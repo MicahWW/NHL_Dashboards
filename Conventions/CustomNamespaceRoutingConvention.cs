@@ -39,20 +39,35 @@ public class CustomNamespaceRoutingConvention : IControllerModelConvention
 
             foreach (var action in controller.Actions)
             {
-                foreach (var selector in action.Selectors)
+                // This sets the URL to be a wildcard format so it catches all paths that don't get set elsewhere
+                if (action.ActionName.Equals("NotFound", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (selector.AttributeRouteModel != null)
+                    action.Selectors.Clear();
+                    action.Selectors.Add(new SelectorModel
                     {
-                        output = $"{route}/{selector.AttributeRouteModel.Template}";
-                        selector.AttributeRouteModel.Template = output;
-                    }
-                    else
-                    {
-                        output = $"{route}/{(action.ActionName == "Index" ? "" : action.ActionName)}";
-                        selector.AttributeRouteModel = new AttributeRouteModel
+                        AttributeRouteModel = new AttributeRouteModel()
                         {
-                            Template = output
-                        };
+                            Template = "{*url}" // Wildcard to catch unmatched requests
+                        }
+                    });
+                }
+                else
+                {
+                    foreach (var selector in action.Selectors)
+                    {
+                        if (selector.AttributeRouteModel != null)
+                        {
+                            output = $"{route}/{selector.AttributeRouteModel.Template}";
+                            selector.AttributeRouteModel.Template = output;
+                        }
+                        else
+                        {
+                            output = $"{route}/{(action.ActionName == "Index" ? "" : action.ActionName)}";
+                            selector.AttributeRouteModel = new AttributeRouteModel
+                            {
+                                Template = output
+                            };
+                        }
                     }
                 }
             }
