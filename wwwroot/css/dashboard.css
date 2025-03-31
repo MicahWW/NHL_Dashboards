@@ -1,0 +1,46 @@
+:root {
+    --titleHeight: 15%;
+}
+
+body {
+    /* Position/Size settings */
+    position: relative;
+    left: 1vw;
+    top: 1vh;
+    width: 98vw;
+    height: 98vh;
+    margin: 0px;
+    /* Font settings */
+    font-family: "Black Ops One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+
+    background-color: black;
+}
+
+#title {
+    height: var(--titleHeight);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#title>img {
+    height: 100%;
+    max-width: 10%;
+    object-fit: contain;
+}
+
+#title>div {
+    height: 100%;
+    max-width: 90%;
+}
+
+main {
+    width: 100%;
+    height: calc(100% - var(--titleHeight));
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

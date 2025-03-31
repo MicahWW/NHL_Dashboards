@@ -13,12 +13,16 @@ public class PlayoffsController(ILogger<RegularSeasonController> logger) : Contr
 
     public IActionResult Eastern()
     {
+        ViewData["StaticFilesName"] = "playoffBrackets";
+        ViewData["Title"] = "Eastern Conference Playoffs";
         ViewData["Conference"] = "Eastern";
         return View("Conference");
     }
 
     public IActionResult Western()
     {
+        ViewData["StaticFilesName"] = "playoffBrackets";
+        ViewData["Title"] = "Western Conference Playoffs";
         ViewData["Conference"] = "Western";
         return View("Conference");
     }
