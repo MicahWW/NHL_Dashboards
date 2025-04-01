@@ -22,7 +22,12 @@ public class CustomNamespaceRoutingConvention : IControllerModelConvention
             {
                 if (selector.AttributeRouteModel != null)
                 {
-                    output = $"Api/{string.Join("/", namespaceSegments.Skip(3))}/{controller.ControllerName[..^3]}";
+                    output += "Api/";
+                    if (namespaceSegments.Length > 3)
+                    {
+                        output += string.Join("/", namespaceSegments.Skip(3)) + "/";
+                    }
+                    output += controller.ControllerName[..^3];
                     selector.AttributeRouteModel = new AttributeRouteModel(new RouteAttribute(output));
                 }
             }
