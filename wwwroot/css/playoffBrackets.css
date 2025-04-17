@@ -1,0 +1,103 @@
+:root {
+    --seriesHeight: 22.5%;
+    --roundOneSeriesSpacing: 2%;
+    --roundWidth: 40%;
+}
+
+main {
+    position: relative;
+}
+
+#round-one,
+#round-two,
+#round-three {
+    width: var(--roundWidth);
+    height: 98%;
+    position: absolute;
+    bottom: 0px;
+}
+
+#round-one {
+    left: 0px;
+}
+
+#round-two {
+    left: calc(var(--roundWidth) + 2%);
+}
+
+#round-three {
+    right: 0px;
+}
+
+.series {
+    height: var(--seriesHeight);
+    width: 100%;
+    position: absolute;
+}
+
+#series-a,
+#series-e {
+    top: 0%;
+}
+
+#series-b,
+#series-f {
+    top: calc(var(--seriesHeight) + var(--roundOneSeriesSpacing));
+}
+
+#series-c,
+#series-g {
+    bottom: calc(var(--seriesHeight) + var(--roundOneSeriesSpacing));
+}
+
+#series-d,
+#series-h {
+    bottom: 0%;
+}
+
+#series-i,
+#series-k {
+    top: calc((var(--seriesHeight) + var(--roundOneSeriesSpacing)) / 2);
+}
+
+#series-j,
+#series-l {
+    bottom: calc((var(--seriesHeight) + var(--roundOneSeriesSpacing)) / 2);
+}
+
+#series-m,
+#series-n {
+
+    top: calc(50% - (var(--seriesHeight) / 2));
+}
+
+.top-team,
+.bot-team {
+    height: 48%;
+    width: 100%;
+    position: absolute;
+    outline: 0.2vw solid white;
+    background-color: rgba(0,0,0, 0.7);
+    border-radius: 1vw;
+}
+
+.top-team {
+    top: 0px;
+}
+
+.bot-team {
+    bottom: 0px;
+}
+
+.wins {
+    height: 100%;
+    width: 25%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    text-align: center;
+}
+
+.logo {
+    height: 100%;
+}

@@ -2,6 +2,12 @@
     --rootTeamDivSize: 10%;
 }
 
+main {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .standing-section-horizontal,
 .standing-section-vertical {
     display: flex;
