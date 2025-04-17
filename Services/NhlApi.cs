@@ -43,6 +43,7 @@ public static class NhlApi
     {
         if (string.IsNullOrEmpty(date))
         {
+            // TODO: instead of finding the latest date you can pass 'now' at the end of the URL and it redirects to the latest date
             var StandingsSeason = await GetStandingsSeasonAsync(httpClient);
             date = StandingsSeason!.Seasons[^1].StandingsEnd;
         }
@@ -61,5 +62,24 @@ public static class NhlApi
             return json;
         else
             throw new Exception("After deserializing standings data the data was null.");
+    }
+
+    public static async Task<NhlPlayoffBracketModel> GetPlayoffBracketAsync(HttpClient httpClient, string year = "")
+    {
+        if (string.IsNullOrEmpty(year))
+            year = DateTime.Now.Year.ToString();
+        
+        using var response = await httpClient.GetAsync($"v1/playoff-bracket/{year}");
+
+        if (!response.IsSuccessStatusCode)
+            throw new Exception("Received a unsuccessful status code when retrieving the playoff bracket data.");
+
+        using var contentStream = await response.Content.ReadAsStreamAsync();
+        var json = JsonSerializer.Deserialize<NhlPlayoffBracketModel>(contentStream, _options);
+
+        if (json != null)
+            return json;
+        else
+            throw new Exception("After deserializing playoff bracket data the data was null.");
     }
 }
