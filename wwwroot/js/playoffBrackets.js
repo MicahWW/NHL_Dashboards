@@ -10,7 +10,7 @@ const getData = async () => {
             const jsonResponse = await response.json();
             displayData(jsonResponse);
         }
-    } catch {
+    } catch(error) {
         console.log(`Get Data error\n ${error}`);
     }
 }
@@ -47,7 +47,7 @@ async function getColors() {
             const jsonResponse = await response.json();
             return jsonResponse;
         }
-    } catch {
+    } catch(error) {
         console.log(`Get colors error\n${error}`);
     }
 }
