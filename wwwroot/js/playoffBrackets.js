@@ -8,15 +8,15 @@ const getData = async () => {
         const response = await fetch(requestURL);
         if (response.ok) {
             const jsonResponse = await response.json();
-            displayData(jsonResponse);
+            await displayData(jsonResponse);
         }
     } catch(error) {
         console.log(`Get Data error\n ${error}`);
     }
 }
 
-function displayData(data) {
-    let colors = getColors();
+async function displayData(data) {
+    let colors = await getColors();
 
     for (let i = 0; i < data.series.length; i++) {
         let ele = document.getElementById(`series-${data.series[i].seriesLetter.toLowerCase()}`)
@@ -25,16 +25,23 @@ function displayData(data) {
             let topTeam = ele.getElementsByClassName("top-team")[0];
             let botTeam = ele.getElementsByClassName("bot-team")[0];
 
-            let topTeamColors = colors[data.series[i].topTeam.abbr];
-            let botTeamColors = colors[data.series[i].botTeam.abbr];
-
-            topTeam.style.backgroundColor = `rgba(${topTeamColors.decimalRed}, ${topTeamColors.decimalGreen}, ${topTeamColors.decimalBlue}, 0.5)`;
-            botTeam.style.backgroundColor = `rgba(${botTeamColors.decimalRed}, ${botTeamColors.decimalGreen}, ${botTeamColors.decimalBlue}, 0.5)`;
+            // let topTeamColors = colors.teams[data.series[i].topTeam.abbr];
+            // let botTeamColors = colors.teams[data.series[i].botTeam.abbr];
+            // topTeam.style.backgroundColor = `rgba(${topTeamColors.colors.primary.decimalRed}, ${topTeamColors.colors.primary.decimalGreen}, ${topTeamColors.colors.primary.decimalBlue}, var(--teamBackgroundOpacity))`;
+            // botTeam.style.backgroundColor = `rgba(${botTeamColors.colors.primary.decimalRed}, ${botTeamColors.colors.primary.decimalGreen}, ${botTeamColors.colors.primary.decimalBlue}, var(--teamBackgroundOpacity))`;
 
             topTeam.getElementsByClassName("logo")[0].src = `https://assets.nhle.com/logos/nhl/svg/${data.series[i].topTeam.abbr}_dark.svg`;
             topTeam.getElementsByClassName("wins")[0].innerHTML = data.series[i].topTeam.wins;
             botTeam.getElementsByClassName("logo")[0].src = `https://assets.nhle.com/logos/nhl/svg/${data.series[i].botTeam.abbr}_dark.svg`;
             botTeam.getElementsByClassName("wins")[0].innerHTML = data.series[i].botTeam.wins;
+
+            if (data.series[i].topTeam.wins == 4) {
+                botTeam.classList.add("seriesLoser");
+            }
+
+            if (data.series[i].botTeam.wins == 4) {
+                topTeam.classList.add("seriesLoser");
+            }
         }
 
     }

@@ -2,6 +2,7 @@
     --seriesHeight: 22.5%;
     --roundOneSeriesSpacing: 2%;
     --roundWidth: 40%;
+    --teamBackgroundOpacity: 0.5;
 }
 
 main {
@@ -77,7 +78,7 @@ main {
     width: 100%;
     position: absolute;
     outline: 0.2vw solid white;
-    background-color: rgba(0,0,0, 0.7);
+    background-color: rgba(0,0,0, var(--teamBackgroundOpacity));
     border-radius: 1vw;
 }
 
@@ -100,4 +101,8 @@ main {
 
 .logo {
     height: 100%;
+}
+
+.seriesLoser {
+    opacity: 0.3;
 }
