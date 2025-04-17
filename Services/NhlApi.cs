@@ -39,7 +39,7 @@ public static class NhlApi
     /// <param name="date">What date to get the standings from, if not passed grab the latest date possible</param>
     /// <returns>Formatted ata from the standings endpoint at the specified date</returns>
     /// <exception cref="Exception"></exception>
-    public static async Task<NhlRegularSeasonStandings> GetRegularSeasonStandingsAsync(HttpClient httpClient, string date = "")
+    public static async Task<NhlRegularSeasonStandingsModel> GetRegularSeasonStandingsAsync(HttpClient httpClient, string date = "")
     {
         if (string.IsNullOrEmpty(date))
         {
@@ -55,7 +55,7 @@ public static class NhlApi
             throw new Exception("Received a unsuccessful status code when retrieving the standings data.");
 
         using var contentStream = await response.Content.ReadAsStreamAsync();
-        var json = JsonSerializer.Deserialize<NhlRegularSeasonStandings>(contentStream, _options);
+        var json = JsonSerializer.Deserialize<NhlRegularSeasonStandingsModel>(contentStream, _options);
 
         if (json != null)
             return json;

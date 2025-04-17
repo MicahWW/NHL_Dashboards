@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace NHL_Dashboards.Models;
 
-public class NhlRegularSeasonStandings
+public class NhlRegularSeasonStandingsModel
 {
     public class TeamData
     {
