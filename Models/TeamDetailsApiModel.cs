@@ -10,8 +10,8 @@ public class TeamDetailsApiModel
             {
                 public string HexCode { get; set; } = hexCode;
                 public int DecimalRed { get; set; } = Int32.Parse(hexCode.Substring(1,2), System.Globalization.NumberStyles.HexNumber);
-                public int DecimalGreen { get; set; } = Int32.Parse(hexCode.Substring(3,4), System.Globalization.NumberStyles.HexNumber);
-                public int DecimalBlue { get; set; } = Int32.Parse(hexCode.Substring(4,5), System.Globalization.NumberStyles.HexNumber);
+                public int DecimalGreen { get; set; } = Int32.Parse(hexCode.Substring(3,2), System.Globalization.NumberStyles.HexNumber);
+                public int DecimalBlue { get; set; } = Int32.Parse(hexCode.Substring(5,2), System.Globalization.NumberStyles.HexNumber);
             }
             public Color Primary { get; set; } = new Color(primary);
             public Color Accent { get; set; } = new Color(accent);
