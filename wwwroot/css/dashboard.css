@@ -2,6 +2,12 @@
     --titleHeight: 15%;
 }
 
+html {
+    background-image: url('/images/stars-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 body {
     position: relative;
     left: 1vw;
@@ -14,8 +20,6 @@ body {
     font-weight: 400;
     font-style: normal;
     color: white;
-
-    background-color: black;
 }
 
 #title {
@@ -41,7 +45,4 @@ body {
 main {
     width: 100%;
     height: calc(100% - var(--titleHeight));
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
 }

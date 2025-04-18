@@ -34,7 +34,7 @@ public class RegularSeasonApiController : ControllerBase
     public async Task<IActionResult> Get([FromQuery] string date = "")
     {
         var httpClient = _httpClientFactory.CreateClient("NhlApi");
-        NhlRegularSeasonStandings Standings;
+        NhlRegularSeasonStandingsModel Standings;
 
         try
         {

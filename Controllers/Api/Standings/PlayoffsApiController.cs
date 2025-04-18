@@ -1,7 +1,7 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
 using NHL_Dashboards.Models;
+using NHL_Dashboards.Services;
 
 namespace NHL_Dashboards.Controllers.Api.Standings;
 
@@ -15,10 +15,144 @@ public class PlayoffsApiController(ILogger<PlayoffsApiController> logger, IHttpC
     [HttpGet]
     [OpenApiTag("Standings")]
     [ProducesResponseType<PlayoffsStandingsApiModel>(StatusCodes.Status200OK)]
-    public IActionResult Get([FromQuery] string year = "")
+    public async Task<IActionResult> Get([FromQuery] string year = "")
     {
-        string testData = "{\"series\":[{\"topTeam\":{\"id\":13,\"abbr\":\"FLA\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":14,\"abbr\":\"TBL\",\"wins\":1,\"seedRank\":4,\"seedAbbr\":\"WC1\"},\"conference\":1,\"seriesLetter\":\"A\"},{\"topTeam\":{\"id\":6,\"abbr\":\"BOS\",\"wins\":4,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"botTeam\":{\"id\":10,\"abbr\":\"TOR\",\"wins\":3,\"seedRank\":3,\"seedAbbr\":\"D3\"},\"conference\":1,\"seriesLetter\":\"B\"},{\"topTeam\":{\"id\":3,\"abbr\":\"NYR\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":15,\"abbr\":\"WSH\",\"wins\":0,\"seedRank\":4,\"seedAbbr\":\"WC2\"},\"conference\":1,\"seriesLetter\":\"C\"},{\"topTeam\":{\"id\":12,\"abbr\":\"CAR\",\"wins\":4,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"botTeam\":{\"id\":2,\"abbr\":\"NYI\",\"wins\":1,\"seedRank\":3,\"seedAbbr\":\"D3\"},\"conference\":1,\"seriesLetter\":\"D\"},{\"topTeam\":{\"id\":25,\"abbr\":\"DAL\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":54,\"abbr\":\"VGK\",\"wins\":3,\"seedRank\":4,\"seedAbbr\":\"WC2\"},\"conference\":0,\"seriesLetter\":\"E\"},{\"topTeam\":{\"id\":52,\"abbr\":\"WPG\",\"wins\":1,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"botTeam\":{\"id\":21,\"abbr\":\"COL\",\"wins\":4,\"seedRank\":3,\"seedAbbr\":\"D3\"},\"conference\":0,\"seriesLetter\":\"F\"},{\"topTeam\":{\"id\":23,\"abbr\":\"VAN\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":18,\"abbr\":\"NSH\",\"wins\":2,\"seedRank\":4,\"seedAbbr\":\"WC1\"},\"conference\":0,\"seriesLetter\":\"G\"},{\"topTeam\":{\"id\":22,\"abbr\":\"EDM\",\"wins\":4,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"botTeam\":{\"id\":26,\"abbr\":\"LAK\",\"wins\":1,\"seedRank\":3,\"seedAbbr\":\"D3\"},\"conference\":0,\"seriesLetter\":\"H\"},{\"topTeam\":{\"id\":13,\"abbr\":\"FLA\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":6,\"abbr\":\"BOS\",\"wins\":2,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"conference\":1,\"seriesLetter\":\"I\"},{\"topTeam\":{\"id\":3,\"abbr\":\"NYR\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":12,\"abbr\":\"CAR\",\"wins\":2,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"conference\":1,\"seriesLetter\":\"J\"},{\"topTeam\":{\"id\":25,\"abbr\":\"DAL\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":21,\"abbr\":\"COL\",\"wins\":2,\"seedRank\":3,\"seedAbbr\":\"D3\"},\"conference\":0,\"seriesLetter\":\"K\"},{\"topTeam\":{\"id\":23,\"abbr\":\"VAN\",\"wins\":3,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":22,\"abbr\":\"EDM\",\"wins\":4,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"conference\":0,\"seriesLetter\":\"L\"},{\"topTeam\":{\"id\":13,\"abbr\":\"FLA\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":3,\"abbr\":\"NYR\",\"wins\":2,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"conference\":1,\"seriesLetter\":\"M\"},{\"topTeam\":{\"id\":25,\"abbr\":\"DAL\",\"wins\":2,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"botTeam\":{\"id\":22,\"abbr\":\"EDM\",\"wins\":4,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"conference\":0,\"seriesLetter\":\"N\"},{\"topTeam\":{\"id\":22,\"abbr\":\"EDM\",\"wins\":3,\"seedRank\":2,\"seedAbbr\":\"D2\"},\"botTeam\":{\"id\":13,\"abbr\":\"FLA\",\"wins\":4,\"seedRank\":1,\"seedAbbr\":\"D1\"},\"conference\":2,\"seriesLetter\":\"O\"}]}";
-        return Content(testData, "application/json");
+        var httpClient = _httpClientFactory.CreateClient("NhlApi");
+        NhlPlayoffBracketModel Bracket;
 
+        try
+        {
+            Bracket = await NhlApi.GetPlayoffBracketAsync(httpClient, year);
+        }
+        catch (Exception ex)
+        {
+            return Problem
+            (
+                title: "Getting Standings data from NHL",
+                detail: ex.Message,
+                statusCode: 500
+            );
+        }
+        
+        var Output = new PlayoffsStandingsApiModel();
+
+        var AllSeries = Bracket.Series;
+
+        // goes through each series from the data received
+        foreach(var series in AllSeries)
+        {
+            var SeriesResult = new PlayoffsStandingsApiModel.SeriesData();
+            SeriesResult.SeriesLetter = series.SeriesLetter;
+            
+            // all of the series that are in the Eastern Conf
+            if("ABCDJIM".Contains(series.SeriesLetter))
+                SeriesResult.Conference = "Eastern";
+            // all of the series that are in the Western Conf
+            else if("EFGHKLN".Contains(series.SeriesLetter))
+                SeriesResult.Conference = "Western";
+            // the only other option is for it to be the final
+            else
+                SeriesResult.Conference = "StanleyCupFinal";
+
+            if(series.TopSeedTeam == null || series.BottomSeedTeam == null)
+            {
+                Output.Series.Add(SeriesResult);
+                continue;
+            }
+            
+            // nothing special is needed for the first round, the data is already in the format we want
+            if(series.PlayoffRound == 1)
+            {
+                SeriesResult.TopTeam = new (
+                    series.TopSeedTeam,
+                    series.TopSeedWins,
+                    series.TopSeedRank,
+                    series.TopSeedRankAbbrev
+                );
+                SeriesResult.BotTeam = new (
+                    series.BottomSeedTeam,
+                    series.BottomSeedWins,
+                    series.BottomSeedRank,
+                    series.BottomSeedRankAbbrev
+                );
+            }
+            /* For the all the rounds after the first the data only tells us the seeds ranks but that
+                * doesn't help for positioning of the playoff bracket. To find the correct positioning it
+                * looks at the series that is 1) from the previous round, 2) 1 of the 2 series that led into
+                * this one, and 3) was higher up in the graphic. It then puts the teams that was in that
+                * previous series on top.
+                */ 
+            else
+            {
+                /* The series that is:
+                    * 1) from the previous round
+                    * 2) 1 of the 2 series that led into this one
+                    * 3) was higher up in the graphic
+                    */
+                string previousRoundTopSeriesLetter = "";
+                if(series.SeriesLetter == "I")
+                    previousRoundTopSeriesLetter = "A";
+                else if(series.SeriesLetter == "J")
+                    previousRoundTopSeriesLetter = "C";
+                else if(series.SeriesLetter == "K")
+                    previousRoundTopSeriesLetter = "E";
+                else if(series.SeriesLetter == "L")
+                    previousRoundTopSeriesLetter = "G";
+                else if(series.SeriesLetter == "M")
+                    previousRoundTopSeriesLetter = "I";
+                else if(series.SeriesLetter == "N")
+                    previousRoundTopSeriesLetter = "K";
+                else if(series.SeriesLetter == "O")
+                    previousRoundTopSeriesLetter = "N";
+
+                // grabs that series data
+                NhlPlayoffBracketModel.SeriesData previousRoundTopSeries = AllSeries.FirstOrDefault(
+                    x => x.SeriesLetter == previousRoundTopSeriesLetter
+                )!;
+
+                // puts the ids from that series into a list for easy compare later
+                List<int> previousRoundTopSeriesTeamIds =
+                [
+                    previousRoundTopSeries.TopSeedTeam!.Id,
+                    previousRoundTopSeries.BottomSeedTeam!.Id,
+                ];
+
+                // sets the data accordingly based on who was in that previous round
+                if(previousRoundTopSeriesTeamIds.Contains(series.TopSeedTeam.Id))
+                {
+                    SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                        series.TopSeedTeam,
+                        series.TopSeedWins,
+                        series.TopSeedRank,
+                        series.TopSeedRankAbbrev
+                        );
+                    SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                        series.BottomSeedTeam,
+                        series.BottomSeedWins,
+                        series.BottomSeedRank,
+                        series.BottomSeedRankAbbrev
+                    );
+                }
+                else
+                {
+                    SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                        series.BottomSeedTeam,
+                        series.BottomSeedWins,
+                        series.BottomSeedRank,
+                        series.BottomSeedRankAbbrev
+                    );
+                    SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                        series.TopSeedTeam,
+                        series.TopSeedWins,
+                        series.TopSeedRank,
+                        series.TopSeedRankAbbrev
+                    );
+                }
+            }
+
+            Output.Series.Add(SeriesResult);
+        }
+
+        return Ok(Output);
     }
 }

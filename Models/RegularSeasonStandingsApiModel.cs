@@ -35,7 +35,7 @@ public class RegularSeasonStandingsApiModel
     public TeamData? EasternWildcard9 { get; set; }
     public TeamData? EasternWildcard10 { get; set; }
 
-    public class TeamData(NhlRegularSeasonStandings.TeamData teamData)
+    public class TeamData(NhlRegularSeasonStandingsModel.TeamData teamData)
     {
         public int Points { get; set; } = teamData.Points;
         public int GamesPlayed { get; set; } = teamData.GamesPlayed;
