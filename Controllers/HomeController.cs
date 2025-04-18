@@ -31,6 +31,7 @@ public class HomeController : Controller
 
     public new IActionResult NotFound()
     {
+        Response.StatusCode = 404;
         return View("NotFound");
     }
 }

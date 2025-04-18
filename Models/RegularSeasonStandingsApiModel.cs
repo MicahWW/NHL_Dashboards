@@ -35,12 +35,12 @@ public class RegularSeasonStandingsApiModel
     public TeamData? EasternWildcard9 { get; set; }
     public TeamData? EasternWildcard10 { get; set; }
 
-    public class TeamData
+    public class TeamData(NhlRegularSeasonStandingsModel.TeamData teamData)
     {
-        public int Points { get; set; }
-        public  int GamesPlayed { get; set; }
-        public  string? Name { get; set; }
-        public  string? Abbr { get; set; }
-        public string? ClinchIndicator { get; set; }               
+        public int Points { get; set; } = teamData.Points;
+        public int GamesPlayed { get; set; } = teamData.GamesPlayed;
+        public string? Name { get; set; } = teamData.TeamCommonName;
+        public string? Abbr { get; set; } = teamData.TeamAbbrev;
+        public string? ClinchIndicator { get; set; } = teamData.ClinchIndicator;
     }
 }

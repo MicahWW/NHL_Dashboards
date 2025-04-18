@@ -1,148 +1,123 @@
 @{
-    Layout = "";
+    Layout = "_Dashboard";
     string ConferenceName = (string)ViewData["Conference"]!;
+    ViewData["Logo"] = $"/images/{ConferenceName}ConferenceLogo.png";
     var PlayoffSections = new OrderedDictionary<string, string>()
     {
         {"top-division", ConferenceName.Equals("Western") ? "Central": "Atlantic"},
         {"bot-division", ConferenceName.Equals("Western") ? "Pacific": "Metropolitan"},
         {"wildcards", "Wildcards"}
-
     };
 }
 
-<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="/css/regularSeason.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
-    <script src="/js/resizeText.js"></script>
-    <script src="/js/regularSeason.js"></script>
-    <style id="dynamicStyle"></style>
-</head>
-
-<body>
-    <div id="title">
-        <img src="/images/@(ConferenceName)ConferenceLogo.png">
-        <div class="resize-text">@ConferenceName Conference Standings</div>
-    </div>
-
-    <div id="playoff-teams" class="standing-section-vertical">
-        <div class="table-headers">
-            <div class="standing-header-section"><!-- blank for spacing --></div>
-            <div class="standing-section">
-                <div class="standing-row">
-                    <div class="standing-number"><!-- blank for spacing --></div>
-                    <div class="team-div">
-                        <div class="team-info"><!-- blank for spacing --></div>
-                        <div class="games-played resize-text">GP</div>
-                        <div class="points resize-text">PTS</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="standing-header-section">
-            @foreach (var section in PlayoffSections)
-            {
-                <div class="@(section.Key)"><div class="standing-header resize-text">@(section.Value)</div></div>
-            }
-        </div>
+<div id="playoff-teams" class="standing-section-vertical">
+    <div class="table-headers">
+        <div class="standing-header-section"><!-- blank for spacing --></div>
         <div class="standing-section">
-            @foreach (var div in PlayoffSections.Keys)
-            {
-                int max = div != "wildcards" ? 3 : 2;
-                <div id="@div" class="@div teams">
-                    @for (int i = 1; i <= max; i++)
-                    {
-                        <div class="standing-row">
-                            <div class="standing-number resize-text">@i</div>
-                            <div id="@i" class="team-div">
-                                <div class="team-info">
-                                    <img class="logo" />
-                                    <div class="clinch-indicator resize-text"></div>
-                                    <div class="name resize-text"></div>
-                                </div>
-                                <div class="games-played resize-text"></div>
-                                <div class="points resize-text"></div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
-        </div>
-    </div>
-    <div id="outside-teams" class="standing-section-vertical">
-        <div class="table-headers">
-            <div class="standing-header-section"><!-- blank for spacing --></div>
-            <div class="standing-section">
-                <div class="standing-row">
-                    <div class="standing-number"><!-- blank for spacing --></div>
-                    <div class="team-div">
-                        <div class="team-info"><!-- blank for spacing --></div>
-                        <div class="games-played resize-text">GP</div>
-                        <div class="points resize-text">PTS</div>
-                    </div>
+            <div class="standing-row">
+                <div class="standing-number"><!-- blank for spacing --></div>
+                <div class="team-div">
+                    <div class="team-info"><!-- blank for spacing --></div>
+                    <div class="games-played resize-text">GP</div>
+                    <div class="points resize-text">PTS</div>
                 </div>
             </div>
         </div>
-        <div class="standing-header-section">
-            <div style="height: 100%; width: 100%;"><div class="standing-header resize-text">Wildcard Race</div></div>
-        </div>
-        <div class="standing-section teams">
-            @for (int i = 9; i <= 16; i++)
-            {
-                <div class="standing-row">
-                    <div class="standing-number resize-text">@i</div>
-                    <div id="@i" class="team-div">
-                        <div class="team-info">
-                            <img class="logo" />
-                            <div class="clinch-indicator resize-text"></div>
-                            <div class="name resize-text"></div>
+    </div>
+    <div class="standing-header-section">
+        @foreach (var section in PlayoffSections)
+        {
+            <div class="@(section.Key)"><div class="standing-header resize-text">@(section.Value)</div></div>
+        }
+    </div>
+    <div class="standing-section">
+        @foreach (var div in PlayoffSections.Keys)
+        {
+            int max = div != "wildcards" ? 3 : 2;
+            <div id="@div" class="@div teams">
+                @for (int i = 1; i <= max; i++)
+                {
+                    <div class="standing-row">
+                        <div class="standing-number resize-text">@i</div>
+                        <div id="@i" class="team-div">
+                            <div class="team-info">
+                                <img class="logo" />
+                                <div class="clinch-indicator resize-text"></div>
+                                <div class="name resize-text"></div>
+                            </div>
+                            <div class="games-played resize-text"></div>
+                            <div class="points resize-text"></div>
                         </div>
-                        <div class="games-played resize-text"></div>
-                        <div class="points resize-text"></div>
                     </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+<div id="outside-teams" class="standing-section-vertical">
+    <div class="table-headers">
+        <div class="standing-header-section"><!-- blank for spacing --></div>
+        <div class="standing-section">
+            <div class="standing-row">
+                <div class="standing-number"><!-- blank for spacing --></div>
+                <div class="team-div">
+                    <div class="team-info"><!-- blank for spacing --></div>
+                    <div class="games-played resize-text">GP</div>
+                    <div class="points resize-text">PTS</div>
                 </div>
-            }
+            </div>
         </div>
     </div>
+    <div class="standing-header-section">
+        <div style="height: 100%; width: 100%;"><div class="standing-header resize-text">Wildcard Race</div></div>
+    </div>
+    <div class="standing-section teams">
+        @for (int i = 9; i <= 16; i++)
+        {
+            <div class="standing-row">
+                <div class="standing-number resize-text">@i</div>
+                <div id="@i" class="team-div">
+                    <div class="team-info">
+                        <img class="logo" />
+                        <div class="clinch-indicator resize-text"></div>
+                        <div class="name resize-text"></div>
+                    </div>
+                    <div class="games-played resize-text"></div>
+                    <div class="points resize-text"></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
-    <script>
-        function resizeTeams() {
-            let oldClass = null;
-            let newClass = null;
+<script>
+    function resizeTeams() {
+        let oldClass = null;
+        let newClass = null;
 
-            if (window.innerHeight / window.innerWidth > 1) {
-                oldClass = "standing-section-horizontal";
-                newClass = "standing-section-vertical";
-            } else {
-                oldClass = "standing-section-vertical";
-                newClass = "standing-section-horizontal";
-            }
-
-            let standingSections = document.getElementsByClassName(oldClass);
-            // as class names are replaced the list of standingSections shortens so the length shortens
-            while (standingSections.length > 0) {
-                standingSections[0].classList.replace(oldClass, newClass);
-            }
+        if (window.innerHeight / window.innerWidth > 1) {
+            oldClass = "standing-section-horizontal";
+            newClass = "standing-section-vertical";
+        } else {
+            oldClass = "standing-section-vertical";
+            newClass = "standing-section-horizontal";
         }
 
-        function resizeAll() {
-            resizeTeams();
-            resizeText();
+        let standingSections = document.getElementsByClassName(oldClass);
+        // as class names are replaced the list of standingSections shortens so the length shortens
+        while (standingSections.length > 0) {
+            standingSections[0].classList.replace(oldClass, newClass);
         }
+        resizeText();
+    }
 
-        const reloadData = async () => {
-            await getData("@(PlayoffSections["top-division"])", "@(PlayoffSections["bot-division"])", "@ConferenceName");
-            resizeAll();
-        };
+    const reloadData = async () => {
+        await getData("@(PlayoffSections["top-division"])", "@(PlayoffSections["bot-division"])", "@ConferenceName");
+        resizeText();
+    };
 
-        window.onload = reloadData;
-        window.onresize = resizeAll;
-        setInterval(reloadData, 1800000);
-    </script>
-</body>
+    window.addEventListener("load", reloadData);
+    window.addEventListener("load", resizeTeams);
+    window.addEventListener("resize", resizeTeams);
+    setInterval(reloadData, 1800000);
+</script>

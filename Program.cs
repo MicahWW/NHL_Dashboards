@@ -32,14 +32,7 @@ app.UseOpenApi();
 app.UseSwaggerUi();
 app.UseReDoc(options => options.Path = "/redoc");
 
-app.UseStatusCodePages(async context =>
-{
-    if (context.HttpContext.Response.StatusCode == 404)
-    {
-        context.HttpContext.Response.Redirect("/NotFound");
-    }
-    await Task.CompletedTask;
-});
+app.UseStatusCodePages(); 
 
 app.UseHttpsRedirection();
 app.UseRouting();

@@ -1,0 +1,48 @@
+:root {
+    --titleHeight: 15%;
+}
+
+html {
+    background-image: url('/images/stars-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body {
+    position: relative;
+    left: 1vw;
+    top: 1vh;
+    width: 98vw;
+    height: 98vh;
+    margin: 0px;
+    /* Font settings */
+    font-family: "Black Ops One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+}
+
+#title {
+    height: var(--titleHeight);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#title>img {
+    height: 100%;
+    max-width: 35%;
+    object-fit: contain;
+}
+
+#title>div {
+    max-height: 100%;
+    max-width: 90%;
+    text-align: center;
+    align-content: center;
+}
+
+main {
+    width: 100%;
+    height: calc(100% - var(--titleHeight));
+}
