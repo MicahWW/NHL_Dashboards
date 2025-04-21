@@ -1,4 +1,6 @@
 using NHL_Dashboards.Conventions;
+using Azure.Identity;
+
 
 #region Configure Services
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,10 @@ builder.Services.AddHttpClient(
     "NhlApi",
     client => client.BaseAddress = new Uri("https://api-web.nhle.com/")
 );
+
+var KeyVaultUrl = new Uri("https://dsit-static-vault.vault.azure.net");
+
+builder.Configuration.AddAzureKeyVault(KeyVaultUrl, new DefaultAzureCredential());
 #endregion
 
 #region Configure App
