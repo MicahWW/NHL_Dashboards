@@ -1,0 +1,266 @@
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Press Seating Chart</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/seating.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div class="leftSideBar">
+            <h2 id="pageTitle" class="text">PRESS BOX SEATING CHART</h2>
+            <hr />
+            <br />
+            <h3 id="dsVSopp" class="text"></h3>
+            <h4 class="text" id="date"></h4>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h2 class="text" id="wifiHeader">WIFI INFO</h2>
+            <table id="WiFiInfoTable" class="smallerText">
+                <tbody style="height: auto;">
+                    <tr>
+                        <td class="WiFiInfo">Network: </td>
+                        <td id="networkName" class="WiFiInfo"></td>
+                    </tr>
+                    <tr>
+                        <td class="WiFiInfo">Password: </td>
+                        <td id="wifiPassword" class="WiFiInfo"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            <img id="qrcode" src="/images/wifi_qr_code.png">
+        </div>
+
+        <div class="toggleBox" id="mainPressBox" style="display: flex;">
+            <div class="chart chartLeft">
+                <h2 class="chartHeader text">ROW 1</h2>
+                <p id="1" class="chartData"></p>
+                <p id="2" class="chartData"></p>
+                <p id="3" class="chartData"></p>
+                <p id="4" class="chartData"></p>
+                <p id="5" class="chartData"></p>
+                <p id="6" class="chartData"></p>
+                <p id="7" class="chartData"></p>
+                <p id="8" class="chartData"></p>
+                <p id="9" class="chartData"></p>
+                <p id="10" class="chartData"></p>
+                <p id="11" class="chartData"></p>
+                <p id="12" class="chartData"></p>
+                <p id="13" class="chartData"></p>
+                <p id="14" class="chartData"></p>
+                <p id="15" class="chartData"></p>
+                <p id="16" class="chartData"></p>
+                <p id="17" class="chartData"></p>
+                <p id="18" class="chartData"></p>
+                <p id="19" class="chartData"></p>
+                <p id="20" class="chartData"></p>
+                <p id="21" class="chartData"></p>
+                <p id="22" class="chartData"></p>
+                <p id="23" class="chartData"></p>
+                <p id="24" class="chartData"></p>
+                <p id="25" class="chartData"></p>
+                <p id="26" class="chartData"></p>
+                <p id="27" class="chartData"></p>
+                <p id="28" class="chartData"></p>
+                <p id="29" class="chartData"></p>
+                <p id="30" class="chartData"></p>
+                <p id="31" class="chartData"></p>
+                <p id="32" class="chartData"></p>
+                <p id="33" class="chartData"></p>
+                <p id="34" class="chartData"></p>
+                <p id="35" class="chartData"></p>
+                <p id="36" class="chartData"></p>
+            </div>
+            <div class="chart chartRight">
+                <h2 class="chartHeader text">ROW 2</h2>
+                <p id="37" class="chartData"></p>
+                <p id="38" class="chartData"></p>
+                <p id="39" class="chartData"></p>
+                <p id="40" class="chartData"></p>
+                <p id="41" class="chartData"></p>
+                <p id="42" class="chartData"></p>
+                <p id="43" class="chartData"></p>
+                <p id="44" class="chartData"></p>
+                <p id="45" class="chartData"></p>
+                <p id="46" class="chartData"></p>
+                <p id="47" class="chartData"></p>
+                <p id="48" class="chartData"></p>
+                <p id="49" class="chartData"></p>
+                <p id="50" class="chartData"></p>
+                <p id="51" class="chartData"></p>
+                <p id="52" class="chartData"></p>
+                <p id="53" class="chartData"></p>
+                <p id="54" class="chartData"></p>
+                <p id="55" class="chartData"></p>
+                <p id="56" class="chartData"></p>
+                <p id="57" class="chartData"></p>
+                <p id="58" class="chartData"></p>
+                <p id="59" class="chartData"></p>
+                <p id="60" class="chartData"></p>
+                <p id="61" class="chartData"></p>
+                <p id="62" class="chartData"></p>
+                <p id="63" class="chartData"></p>
+                <p id="64" class="chartData"></p>
+                <p id="65" class="chartData"></p>
+                <p id="66" class="chartData"></p>
+                <p id="67" class="chartData"></p>
+                <p id="68" class="chartData"></p>
+                <p id="69" class="chartData"></p>
+                <p id="70" class="chartData"></p>
+                <p id="71" class="chartData"></p>
+                <p id="72" class="chartData"></p>
+                <p id="73" class="chartData"></p>
+                <p id="74" class="chartData"></p>
+            </div>
+            
+            <div class="rightSideBar">
+                <table class="booths">
+                    <thead>
+                        <tr><th><h2 class="chartHeader text">BOOTHS</h2></th></tr>
+                    </thead>
+                    <tr><td id="booth1" class="booth"></td></tr>
+                    <tr><td id="booth2" class="booth"></td></tr>
+                    <tr><td id="booth3" class="booth"></td></tr>
+                    <tr><td id="booth4" class="booth"></td></tr>
+                    <tr><td id="booth5" class="booth"></td></tr>
+                    <tr><td id="booth6" class="booth"></td></tr>
+                    <tr><td id="booth7" class="booth"></td></tr>
+                    <tr><td id="booth8" class="booth"></td></tr>
+                    <tr><td id="booth9" class="booth"></td></tr>
+                    <tr><td id="booth10" class="booth"></td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="toggleBox" id="auxBoxOne" style="display: none;">
+            <div class="auxChart auxRow1">
+                <h2 class="chartHeader text">ROW M</h2>
+                <p id="aux1" class="chartData"></p>
+                <p id="aux2" class="chartData"></p>
+                <p id="aux3" class="chartData"></p>
+                <p id="aux4" class="chartData"></p>
+                <p id="aux5" class="chartData"></p>
+                <p id="aux6" class="chartData"></p>
+                <p id="aux7" class="chartData"></p>
+                <p id="aux8" class="chartData"></p>
+                <p id="aux9" class="chartData"></p>
+            </div>
+
+            <div class="auxChart auxRow2">
+                <h2 class="chartHeader text">ROW N</h2>
+                <p id="aux10" class="chartData"></p>
+                <p id="aux11" class="chartData"></p>
+                <p id="aux12" class="chartData"></p>
+                <p id="aux13" class="chartData"></p>
+                <p id="aux14" class="chartData"></p>
+                <p id="aux15" class="chartData"></p>
+                <p id="aux16" class="chartData"></p>
+                <p id="aux17" class="chartData"></p>
+                <p id="aux18" class="chartData"></p>
+                <p id="aux19" class="chartData"></p>
+            </div>
+        </div>
+
+        <div class="toggleBox" id="auxBoxTwo" style="display: none;">
+            <div class="auxChart auxRow3">
+                <h2 class="chartHeader text">ROW C</h2>
+            </div>
+
+            <div class="auxChart auxRow4">
+                <h2 class="chartHeader text">ROW D</h2>
+                <p id="aux20" class="chartData"></p>
+                <p id="aux21" class="chartData"></p>
+                <p id="aux22" class="chartData"></p>
+                <p id="aux23" class="chartData"></p>
+                <p id="aux24" class="chartData"></p>
+                <p id="aux25" class="chartData"></p>
+                <p id="aux26" class="chartData"></p>
+            </div>
+
+            <div class="auxChart auxRow5">
+                <h2 class="chartHeader text">ROW E</h2>
+                <p id="aux27" class="chartData"></p>
+                <p id="aux28" class="chartData"></p>
+                <p id="aux29" class="chartData"></p>
+                <p id="aux30" class="chartData"></p>
+                <p id="aux31" class="chartData"></p>
+                <p id="aux32" class="chartData"></p>
+                <p id="aux33" class="chartData"></p>
+                <p id="aux34" class="chartData"></p>
+                <p id="aux35" class="chartData"></p>
+                <p id="aux36" class="chartData"></p>
+                <p id="aux37" class="chartData"></p>
+                <p id="aux38" class="chartData"></p>
+            </div>
+
+            <div class="auxChart auxRow6">
+                <h2 class="chartHeader text">ROW F</h2>
+                <p id="aux39" class="chartData"></p>
+                <p id="aux40" class="chartData"></p>
+                <p id="aux41" class="chartData"></p>
+                <p id="aux42" class="chartData"></p>
+                <p id="aux43" class="chartData"></p>
+                <p id="aux44" class="chartData"></p>
+                <p id="aux45" class="chartData"></p>
+                <p id="aux46" class="chartData"></p>
+                <p id="aux47" class="chartData"></p>
+                <p id="aux48" class="chartData"></p>
+                <p id="aux49" class="chartData"></p>
+                <p id="aux50" class="chartData"></p>
+                <p id="aux51" class="chartData"></p>
+            </div>
+
+            <div class="auxChart auxRow7">
+                <h2 class="chartHeader text">ROW G</h2>
+                <p id="aux52" class="chartData"></p>
+                <p id="aux53" class="chartData"></p>
+                <p id="aux54" class="chartData"></p>
+                <p id="aux55" class="chartData"></p>
+                <p id="aux56" class="chartData"></p>
+                <p id="aux57" class="chartData"></p>
+                <p id="aux58" class="chartData"></p>
+                <p id="aux59" class="chartData"></p>
+            </div>
+
+            <!-- <div class="auxChart auxRow8">
+                <h2 class="chartHeader text">ROW 8</h2>
+                <p id="aux60" class="chartData"></p>
+                <p id="aux61" class="chartData"></p>
+                <p id="aux62" class="chartData"></p>
+                <p id="aux63" class="chartData"></p>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="/js/seating.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+body {
+    height: 1080px;
+    width: 1920px;
+    background-image: url("/images/seating_background.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0px;
+    color: white;
+    /* font-family:  'Times New Roman', Times, serif; */
+    /* font-family: "HK Grotesk", sans-serif; */
+    font-family: 'Overpass', sans-serif;
+    font-weight: bolder;
+}
+
+#container {
+    height: 1060px;
+    width: 1880px;
+    display: flex;
+    padding-inline: 20px;
+    padding-block: 10px;
+}
+
+tbody {
+    height: 968px;
+}
+
+hr {
+    color: white;
+    border: none;
+    height: 5px;
+    background-color: white;
+    /* helps center the bar */
+    margin-top: 12px;
+}
+
+.leftSideBar {
+    width: 470px;
+    text-align: center;
+}
+
+#WiFiInfoTable, #qrcode {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#qrcode {
+    width: 200px;
+    height: 200px;
+}
+
+.rightSideBar {
+    width: 360px;
+}
+
+.booths {
+    text-align: left;
+    width: 100%;
+}
+
+.booth {
+    height: 95px;
+    width: 100%;
+    vertical-align: top;
+    outline-color: white;
+    outline-style: solid;
+    outline-width: 5px;
+    outline-offset: -10px;
+}
+
+.boothText {
+    padding-inline: 20px;
+    font-size: 30px;
+    position: relative;
+}
+
+.text {
+    margin: 0px;
+}
+
+h1 {
+    font-size: 70px;
+}
+
+h2 {
+    font-size: 55px;
+}
+
+h3, .smallerText {
+    font-size: 40px;
+}
+
+h4 {
+    font-size: 30px;
+}
+
+.WiFiInfo {
+    font-size: 20px;
+    vertical-align: top;
+}
+
+.chart {
+    width: 515px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.auxChart {
+    width: 675px;
+    /* height: 50%; */
+    height: auto;
+}
+
+.chartLeft {
+    margin-left: 20px;
+}
+/* 
+.chartRight {
+    margin-right: 20px;
+} */
+
+.chartHeader {
+    text-align: center;
+    height: 65px;
+    text-decoration: underline;
+}
+
+#wifiHeader {
+    text-decoration: underline;
+}
+
+.chartData {
+    font-size: 20px;
+    margin: 0px;
+    height: 27.63px;
+}
+
+.toggleBox {
+    width: 1410px;
+    height: 1060px;
+}
+
+#auxBoxOne, #auxBoxTwo {
+    flex-wrap: wrap;
+    justify-content: center;
+}
