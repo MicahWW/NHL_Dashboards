@@ -12,10 +12,10 @@ public static class NhlApi
 
 
     /// <summary>
-    /// Grabs data from the NHL standings-season endpoint
+    /// Grabs data from the NHL standings-season endpoint.
     /// </summary>
-    /// <param name="httpClient">A httpClient setup with the NHL API base URL</param>
-    /// <returns>Formatted data from the standings-season endpoint</returns>
+    /// <param name="httpClient">A httpClient setup with the NHL API base URL.</param>
+    /// <returns>Formatted data from the standings-season endpoint.</returns>
     /// <exception cref="Exception"></exception>
     public static async Task<NhlStandingsSeason> GetStandingsSeasonAsync(HttpClient httpClient)
     {
@@ -33,11 +33,12 @@ public static class NhlApi
     }
 
     /// <summary>
-    /// Grabs data from the NHL standings endpoint.
+    /// Grabs data from the NHL standings endpoint. Specifying a date will return the standings for that date, if no
+    /// date is specified it will return the standings for the latest date possible.
     /// </summary>
-    /// <param name="httpClient">A httpClient setup with the NHL API base URL</param>
-    /// <param name="date">What date to get the standings from, if not passed grab the latest date possible</param>
-    /// <returns>Formatted ata from the standings endpoint at the specified date</returns>
+    /// <param name="httpClient">A httpClient setup with the NHL API base URL.</param>
+    /// <param name="date">What date to get the standings from, if not passed grab the latest date possible.</param>
+    /// <returns>Formatted data from the standings endpoint at the specified date.</returns>
     /// <exception cref="Exception"></exception>
     public static async Task<NhlRegularSeasonStandingsModel> GetRegularSeasonStandingsAsync(HttpClient httpClient, string date = "")
     {
@@ -65,6 +66,14 @@ public static class NhlApi
             throw new Exception("After deserializing standings data the data was null.");
     }
 
+    /// <summary>
+    /// Grabs data from the NHL playoff bracket endpoint. Specifying a year will return the playoff bracket for that
+    /// year, if no year is specified it will return the playoff bracket for the current year.
+    /// </summary>
+    /// <param name="httpClient">A httpClient setup with the NHL API base URL.</param>
+    /// <param name="year">What playoff year to get the playoff bracket from.</param>
+    /// <returns>Formatted data from the playoff bracket endpoint at the requested year.</returns>
+    /// <exception cref="Exception"></exception>
     public static async Task<NhlPlayoffBracketModel> GetPlayoffBracketAsync(HttpClient httpClient, string year = "")
     {
         if (string.IsNullOrEmpty(year))
