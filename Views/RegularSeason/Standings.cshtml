@@ -10,7 +10,7 @@
     };
 }
 
-<div id="playoff-teams" class="standing-section-vertical">
+<div id="playoff-teams" class="standing-section-container">
     <div class="table-headers">
         <div class="standing-header-section"><!-- blank for spacing --></div>
         <div class="standing-section">
@@ -54,7 +54,7 @@
         }
     </div>
 </div>
-<div id="outside-teams" class="standing-section-vertical">
+<div id="outside-teams" class="standing-section-container">
     <div class="table-headers">
         <div class="standing-header-section"><!-- blank for spacing --></div>
         <div class="standing-section">
@@ -91,33 +91,12 @@
 </div>
 
 <script>
-    function resizeTeams() {
-        let oldClass = null;
-        let newClass = null;
-
-        if (window.innerHeight / window.innerWidth > 1) {
-            oldClass = "standing-section-horizontal";
-            newClass = "standing-section-vertical";
-        } else {
-            oldClass = "standing-section-vertical";
-            newClass = "standing-section-horizontal";
-        }
-
-        let standingSections = document.getElementsByClassName(oldClass);
-        // as class names are replaced the list of standingSections shortens so the length shortens
-        while (standingSections.length > 0) {
-            standingSections[0].classList.replace(oldClass, newClass);
-        }
-        resizeText();
-    }
-
     const reloadData = async () => {
         await getData("@(PlayoffSections["top-division"])", "@(PlayoffSections["bot-division"])", "@ConferenceName");
         resizeText();
     };
 
     window.addEventListener("load", reloadData);
-    window.addEventListener("load", resizeTeams);
-    window.addEventListener("resize", resizeTeams);
+    window.addEventListener("resize", resizeText);
     setInterval(reloadData, 1800000);
 </script>
