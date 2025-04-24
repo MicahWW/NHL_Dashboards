@@ -43,12 +43,13 @@ public static class NhlApi
     {
         if (string.IsNullOrEmpty(date))
         {
-            // TODO: instead of finding the latest date you can pass 'now' at the end of the URL and it redirects to the latest date
-            var StandingsSeason = await GetStandingsSeasonAsync(httpClient);
-            date = StandingsSeason!.Seasons[^1].StandingsEnd;
+            // The NHL API will redirect to the latest date if no date is passed in the URL
+            date = "now";
         }
         else {
-            // TODO: Validate the users date input as a valid date format and it is within a range given by the NHL
+            // Validate the date format to be yyyy-MM-dd
+            if (!DateTime.TryParseExact(date, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out _))
+                throw new Exception("The date passed in was not in the correct format. Please use yyyy-MM-dd.");
         }
 
         using var response = await httpClient.GetAsync($"v1/standings/{date}");
