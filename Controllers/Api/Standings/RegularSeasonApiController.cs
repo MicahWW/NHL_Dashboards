@@ -7,16 +7,10 @@ namespace NHL_Dashboards.Controllers.Api.Standings;
 
 [ApiController]
 [Route("[controller]")]
-public class RegularSeasonApiController : ControllerBase
+public class RegularSeasonApiController(ILogger<RegularSeasonApiController> logger, NhlApi nhlApi) : ControllerBase
 {
-    private readonly IHttpClientFactory _httpClientFactory;
-    private readonly ILogger<RegularSeasonApiController> _logger;
-
-    public RegularSeasonApiController(ILogger<RegularSeasonApiController> logger, IHttpClientFactory httpClientFactory)
-    {
-        _logger = logger;
-        _httpClientFactory = httpClientFactory;
-    }
+    private readonly ILogger<RegularSeasonApiController> _logger = logger;
+    private readonly NhlApi _nhlApi = nhlApi;
 
 
     /// <summary>
@@ -33,12 +27,11 @@ public class RegularSeasonApiController : ControllerBase
     [ProducesResponseType<ProblemDetails>(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Get([FromQuery] string date = "")
     {
-        var httpClient = _httpClientFactory.CreateClient("NhlApi");
         NhlRegularSeasonStandingsModel Standings;
 
         try
         {
-            Standings = await NhlApi.GetRegularSeasonStandingsAsync(httpClient, date);
+            Standings = await _nhlApi.GetRegularSeasonStandingsAsync(date);
         }
         catch (Exception ex)
         {

@@ -1,4 +1,5 @@
 using NHL_Dashboards.Conventions;
+using NHL_Dashboards.Services;
 
 #region Configure Services
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,8 @@ builder.Services.AddHttpClient(
     "NhlApi",
     client => client.BaseAddress = new Uri("https://api-web.nhle.com/")
 );
+
+builder.Services.AddTransient<NhlApi>();
 #endregion
 
 #region Configure App
