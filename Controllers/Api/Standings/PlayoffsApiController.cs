@@ -7,22 +7,21 @@ namespace NHL_Dashboards.Controllers.Api.Standings;
 
 [ApiController]
 [Route("[controller]")]
-public class PlayoffsApiController(ILogger<PlayoffsApiController> logger, IHttpClientFactory httpClientFactory) : ControllerBase
+public class PlayoffsApiController(ILogger<PlayoffsApiController> logger, NhlApi nhlApi) : ControllerBase
 {
-    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly ILogger<PlayoffsApiController> _logger = logger;
+    private readonly NhlApi _nhlApi = nhlApi;
 
     [HttpGet]
     [OpenApiTag("Standings")]
     [ProducesResponseType<PlayoffsStandingsApiModel>(StatusCodes.Status200OK)]
     public async Task<IActionResult> Get([FromQuery] string year = "")
     {
-        var httpClient = _httpClientFactory.CreateClient("NhlApi");
         NhlPlayoffBracketModel Bracket;
 
         try
         {
-            Bracket = await NhlApi.GetPlayoffBracketAsync(httpClient, year);
+            Bracket = await _nhlApi.GetPlayoffBracketAsync(year);
         }
         catch (Exception ex)
         {

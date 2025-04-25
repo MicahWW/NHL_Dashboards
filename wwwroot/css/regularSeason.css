@@ -8,21 +8,24 @@ main {
     flex-wrap: wrap;
 }
 
-.standing-section-horizontal,
-.standing-section-vertical {
+.standing-section-container {
     display: flex;
     flex-wrap:  wrap;
     justify-content: center;
 }
 
-.standing-section-horizontal {
-    height: 100%;
-    width: 50%;
+@media (orientation: landscape) {
+    .standing-section-container {
+        height: 100%;
+        width: 50%;
+    }
 }
 
-.standing-section-vertical {
-    height: 50%;
-    width: 100%;
+@media (orientation: portrait) {
+    .standing-section-container {
+        height: 50%;
+        width: 100%;
+    }
 }
 
 .table-headers {
