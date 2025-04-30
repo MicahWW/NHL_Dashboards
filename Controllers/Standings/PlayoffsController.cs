@@ -11,19 +11,43 @@ public class PlayoffsController(ILogger<RegularSeasonController> logger) : Contr
         return View();
     }
 
-    public IActionResult Eastern()
+    private void ConferenceSetup(string conferenceName)
     {
-        ViewData["StaticFilesName"] = "playoffBrackets";
-        ViewData["Title"] = "Eastern Conference Playoffs";
-        ViewData["Conference"] = "Eastern";
-        return View("Conference");
+        ViewData["JsFileName"] = "playoffBrackets.js";
+        ViewData["CssFileName"] = "conference.css";
+        ViewData["Title"] = $"{conferenceName} Conference Playoffs";
+        ViewData["Logo"] = $"/images/{conferenceName}ConferenceLogo.png";
     }
 
-    public IActionResult Western()
+    public IActionResult EasternConference()
     {
-        ViewData["StaticFilesName"] = "playoffBrackets";
-        ViewData["Title"] = "Western Conference Playoffs";
-        ViewData["Conference"] = "Western";
-        return View("Conference");
+        ConferenceSetup("Eastern");
+        return View("Standings");
+    }
+
+    public IActionResult WesternConference()
+    {
+        ConferenceSetup("Western");
+        return View("Standings");
+    }
+
+    public IActionResult ConferenceFinals()
+    {
+        ViewData["JsFileName"] = "playoffBrackets.js";
+        ViewData["CssFileName"] = "conferenceFinal.css";
+        ViewData["Title"] = "Conference Finals";
+        ViewData["Logo"] = "/images/stanleyCup.png";
+
+        return View("Standings");
+    }
+
+    public IActionResult StanleyCupFinal()
+    {
+        ViewData["JsFileName"] = "playoffBrackets.js";
+        ViewData["CssFileName"] = "stanleyCupFinal.css";
+        ViewData["Title"] = "Stanley Cup Finals";
+        ViewData["Logo"] = "/images/stanleyCup.png";
+
+        return View("Standings");
     }
 }

@@ -1,0 +1,87 @@
+main {
+    position: relative;
+}
+
+#stanley-cup-final {
+    width: 100%;
+    height: 98%;
+    position: absolute;
+    bottom: 0px;
+}
+
+.series {
+    height: 100%;
+    width: 100%;
+}
+
+.top-team,
+.bot-team {
+    position: absolute;
+    outline: 0.2vw solid white;
+    border-radius: 1vw;
+    display: flex;
+}
+
+.wins {
+    text-align: center;
+    position: absolute;
+}
+
+@media (orientation: portrait) {
+    .top-team,
+    .bot-team {
+        height: 49%;
+        width: 100%;
+        align-items: center;
+    }
+
+    .top-team {
+        top: 0px;
+    }
+
+    .bot-team {
+        bottom: 0px;
+    }
+
+    .logo {
+        max-height: 100%;
+        max-width: 75%;
+    }
+
+    .wins {
+        max-height: 100%;
+        width: 25%;
+        right: 0px;
+    }
+}
+
+@media (orientation: landscape) {
+    .top-team,
+    .bot-team {
+        height: 100%;
+        width: 49%;
+        justify-content: center;
+    }
+
+    .top-team {
+        left: 0px;
+    }
+
+    .bot-team {
+        right: 0px;
+    }
+
+    .wins,
+    .logo {
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    .wins {
+        bottom: 0px;
+    }
+}
+
+.series-loser {
+    opacity: 0.3;
+}
