@@ -40,8 +40,10 @@ public class PlayoffsApiController(ILogger<PlayoffsApiController> logger, NhlApi
         // goes through each series from the data received
         foreach (var series in AllSeries)
         {
-            var SeriesResult = new PlayoffsStandingsApiModel.SeriesData();
-            SeriesResult.SeriesLetter = series.SeriesLetter;
+            var SeriesResult = new PlayoffsStandingsApiModel.SeriesData
+            {
+                SeriesLetter = series.SeriesLetter
+            };
 
             // all of the series that are in the Eastern Conf
             if ("ABCDJIM".Contains(series.SeriesLetter))
@@ -52,12 +54,6 @@ public class PlayoffsApiController(ILogger<PlayoffsApiController> logger, NhlApi
             // the only other option is for it to be the final
             else
                 SeriesResult.Conference = "StanleyCupFinal";
-
-            if (series.TopSeedTeam == null || series.BottomSeedTeam == null)
-            {
-                Output.Series.Add(SeriesResult);
-                continue;
-            }
 
             // nothing special is needed for the first round, the data is already in the format we want
             if (series.PlayoffRound == 1)
@@ -76,18 +72,18 @@ public class PlayoffsApiController(ILogger<PlayoffsApiController> logger, NhlApi
                 );
             }
             /* For the all the rounds after the first the data only tells us the seeds ranks but that
-                * doesn't help for positioning of the playoff bracket. To find the correct positioning it
-                * looks at the series that is 1) from the previous round, 2) 1 of the 2 series that led into
-                * this one, and 3) was higher up in the graphic. It then puts the teams that was in that
-                * previous series on top.
-                */
+            * doesn't help for positioning of the playoff bracket. To find the correct positioning it
+            * looks at the series that is 1) from the previous round, 2) 1 of the 2 series that led into
+            * this one, and 3) was higher up in the graphic. It then puts the teams that was in that
+            * previous series on top.
+            */
             else
             {
                 /* The series that is:
-                    * 1) from the previous round
-                    * 2) 1 of the 2 series that led into this one
-                    * 3) was higher up in the graphic
-                    */
+                 * 1) from the previous round
+                 * 2) 1 of the 2 series that led into this one
+                 * 3) was higher up in the graphic
+                 */
                 string previousRoundTopSeriesLetter = "";
                 if (series.SeriesLetter == "I")
                     previousRoundTopSeriesLetter = "A";
@@ -109,46 +105,120 @@ public class PlayoffsApiController(ILogger<PlayoffsApiController> logger, NhlApi
                     x => x.SeriesLetter == previousRoundTopSeriesLetter
                 )!;
 
-                // puts the ids from that series into a list for easy compare later
-                List<int> previousRoundTopSeriesTeamIds =
-                [
-                    previousRoundTopSeries.TopSeedTeam!.Id,
-                    previousRoundTopSeries.BottomSeedTeam!.Id,
-                ];
+                string previousRoundBotSeriesLetter = "";
+                if (series.SeriesLetter == "I")
+                    previousRoundBotSeriesLetter = "B";
+                else if (series.SeriesLetter == "J")
+                    previousRoundBotSeriesLetter = "D";
+                else if (series.SeriesLetter == "K")
+                    previousRoundBotSeriesLetter = "F";
+                else if (series.SeriesLetter == "L")
+                    previousRoundBotSeriesLetter = "H";
+                else if (series.SeriesLetter == "M")
+                    previousRoundBotSeriesLetter = "J";
+                else if (series.SeriesLetter == "N")
+                    previousRoundBotSeriesLetter = "L";
+                else if (series.SeriesLetter == "O")
+                    previousRoundBotSeriesLetter = "M";
 
-                // sets the data accordingly based on who was in that previous round
-                if (previousRoundTopSeriesTeamIds.Contains(series.TopSeedTeam.Id))
+                // grabs that series data
+                NhlPlayoffBracketModel.SeriesData previousRoundBotSeries = AllSeries.FirstOrDefault(
+                    x => x.SeriesLetter == previousRoundBotSeriesLetter
+                )!;
+                
+
+                /* If the series teams haven't been determined, it will be null and we need to check if the previous
+                 * round series has a winner. If the previous round series has a winner, we need to advance that team to
+                 * the next round in the correct position.
+                 */
+                if (series.TopSeedTeam == null || series.BottomSeedTeam == null)
                 {
-                    SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
-                        series.TopSeedTeam,
-                        series.TopSeedWins,
-                        series.TopSeedRank,
-                        series.TopSeedRankAbbrev
-                        );
-                    SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
-                        series.BottomSeedTeam,
-                        series.BottomSeedWins,
-                        series.BottomSeedRank,
-                        series.BottomSeedRankAbbrev
-                    );
+                    if (previousRoundTopSeries.SeriesWinnerId() != -1)
+                    {
+                        if (previousRoundTopSeries.TopSeedTeam!.Id == previousRoundTopSeries.SeriesWinnerId())
+                        {
+                            SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                                previousRoundTopSeries.TopSeedTeam,
+                                0,
+                                previousRoundTopSeries.TopSeedRank,
+                                previousRoundTopSeries.TopSeedRankAbbrev
+                            );
+                        }
+                        else
+                        {
+                            SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                                previousRoundTopSeries.BottomSeedTeam,
+                                0,
+                                previousRoundTopSeries.BottomSeedRank,
+                                previousRoundTopSeries.BottomSeedRankAbbrev
+                            );
+                        }
+                    }
+                    if (previousRoundBotSeries.SeriesWinnerId() != -1)
+                    {
+                        if (previousRoundBotSeries.TopSeedTeam!.Id == previousRoundBotSeries.SeriesWinnerId())
+                        {
+                            SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                                previousRoundBotSeries.TopSeedTeam,
+                                0,
+                                previousRoundBotSeries.TopSeedRank,
+                                previousRoundBotSeries.TopSeedRankAbbrev
+                            );
+                        }
+                        else
+                        {
+                            SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                                previousRoundBotSeries.BottomSeedTeam,
+                                0,
+                                previousRoundBotSeries.BottomSeedRank,
+                                previousRoundBotSeries.BottomSeedRankAbbrev
+                            );
+                        }
+                    }
                 }
+                // if the series teams have been determined, we need to format the data correctly
                 else
                 {
-                    SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
-                        series.BottomSeedTeam,
-                        series.BottomSeedWins,
-                        series.BottomSeedRank,
-                        series.BottomSeedRankAbbrev
-                    );
-                    SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
-                        series.TopSeedTeam,
-                        series.TopSeedWins,
-                        series.TopSeedRank,
-                        series.TopSeedRankAbbrev
-                    );
+                    // puts the ids from that series into a list for easy compare later
+                    List<int> previousRoundTopSeriesTeamIds =
+                    [
+                        previousRoundTopSeries.TopSeedTeam!.Id,
+                        previousRoundTopSeries.BottomSeedTeam!.Id,
+                    ];
+
+                    // sets the data accordingly based on who was in that previous round
+                    if (previousRoundTopSeriesTeamIds.Contains(series.TopSeedTeam.Id))
+                    {
+                        SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                            series.TopSeedTeam,
+                            series.TopSeedWins,
+                            series.TopSeedRank,
+                            series.TopSeedRankAbbrev
+                            );
+                        SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                            series.BottomSeedTeam,
+                            series.BottomSeedWins,
+                            series.BottomSeedRank,
+                            series.BottomSeedRankAbbrev
+                        );
+                    }
+                    else
+                    {
+                        SeriesResult.TopTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                            series.BottomSeedTeam,
+                            series.BottomSeedWins,
+                            series.BottomSeedRank,
+                            series.BottomSeedRankAbbrev
+                        );
+                        SeriesResult.BotTeam = new PlayoffsStandingsApiModel.SeriesData.TeamData(
+                            series.TopSeedTeam,
+                            series.TopSeedWins,
+                            series.TopSeedRank,
+                            series.TopSeedRankAbbrev
+                        );
+                    }
                 }
             }
-
             Output.Series.Add(SeriesResult);
         }
 

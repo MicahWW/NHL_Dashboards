@@ -37,6 +37,20 @@ public class NhlPlayoffBracketModel
         public int BottomSeedWins { get; set; }
         public TeamSeedData? TopSeedTeam { get; set; }
         public TeamSeedData? BottomSeedTeam { get; set; }
+
+        /// <summary>
+        /// Returns the id of the winning team in the series. If no team has won yet, it returns -1.
+        /// </summary>
+        /// <returns>ID of winning team, -1 means no winner.</returns>
+        public int SeriesWinnerId()
+        {
+            if (TopSeedWins == 4)
+                return TopSeedTeam!.Id;
+            else if (BottomSeedWins == 4)
+                return BottomSeedTeam!.Id;
+            else
+                return -1;
+        }
     }
 
     public required List<SeriesData> Series { get; set; }
