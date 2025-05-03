@@ -1,0 +1,60 @@
+@{
+    Layout = "_Dashboard";
+    string Title = (string)ViewData["Title"]!;
+
+    var SeriesLetters = new OrderedDictionary<string, List<string>>();
+
+    if (Title.Contains("Western") || Title.Contains("Eastern"))
+    {
+        SeriesLetters = new OrderedDictionary<string, List<string>>()
+        {
+            {"round-one", Title.Contains("Western") ? ["e", "f", "g", "h"] : ["a", "b", "c", "d"]},
+            {"round-two", Title.Contains("Western") ? ["k", "l"] : ["i", "j"]},
+            {"round-three", Title.Contains("Western") ? ["n"] : ["m"]}
+        };
+    }
+    else if (Title.Equals("Conference Finals"))
+    {
+        SeriesLetters = new OrderedDictionary<string, List<string>>()
+        {
+            {"western-conference", ["n"]},
+            {"eastern-conference", ["m"]}
+        };
+    }
+    else if (Title.Equals("Stanley Cup Finals"))
+    {
+        SeriesLetters = new OrderedDictionary<string, List<string>>()
+        {
+            {"stanley-cup-final", ["o"]}
+        };
+    }
+}
+
+@foreach (var round in SeriesLetters.Keys)
+{
+    <div id="@round">
+        @foreach (var series in SeriesLetters[round])
+        {
+            <div id="series-@(series)" class="series">
+                @foreach (var team in new string[] { "top-team", "bot-team" })
+                {
+                    <div class="@team">
+                        <img class="logo" />
+                        <div class="wins resize-text"></div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+
+<script>
+    const reloadData = async () => {
+        await getData();
+        resizeText();
+    };
+    window.addEventListener("load", reloadData);
+    window.addEventListener("load", resizeText);
+    window.addEventListener("resize", resizeText);
+    setInterval(reloadData, 1800000);
+</script>

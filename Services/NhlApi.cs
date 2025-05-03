@@ -69,7 +69,8 @@ public class NhlApi(IHttpClientFactory httpClientFactory)
             // The NHL API will redirect to the latest date if no date is passed in the URL
             date = "now";
         }
-        else {
+        else
+        {
             // Validate the date format to be yyyy-MM-dd
             if (!DateTime.TryParseExact(date, "yyyy-MM-dd", null, System.Globalization.DateTimeStyles.None, out _))
                 throw new Exception("The date passed in was not in the correct format. Please use yyyy-MM-dd.");
@@ -102,7 +103,7 @@ public class NhlApi(IHttpClientFactory httpClientFactory)
     {
         if (string.IsNullOrEmpty(year))
             year = DateTime.Now.Year.ToString();
-        
+
         using var response = await _httpClient.GetAsync($"v1/playoff-bracket/{year}");
 
         if (!response.IsSuccessStatusCode)

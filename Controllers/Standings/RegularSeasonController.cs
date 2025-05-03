@@ -2,14 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NHL_Dashboards.Controllers.Standings;
 
-public class RegularSeasonController : Controller
+public class RegularSeasonController(ILogger<RegularSeasonController> logger) : Controller
 {
-    private readonly ILogger<RegularSeasonController> _logger;
-
-    public RegularSeasonController(ILogger<RegularSeasonController> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger<RegularSeasonController> _logger = logger;
 
     public IActionResult Index()
     {
@@ -18,7 +13,8 @@ public class RegularSeasonController : Controller
 
     public IActionResult Eastern()
     {
-        ViewData["StaticFilesName"] = "regularSeason";
+        ViewData["JsFileName"] = "regularSeason.js";
+        ViewData["CssFileName"] = "regularSeason.css";
         ViewData["Title"] = "Eastern Conference Standings";
         ViewData["Conference"] = "Eastern";
         return View("Standings");
@@ -26,7 +22,8 @@ public class RegularSeasonController : Controller
 
     public IActionResult Western()
     {
-        ViewData["StaticFilesName"] = "regularSeason";
+        ViewData["JsFileName"] = "regularSeason.js";
+        ViewData["CssFileName"] = "regularSeason.css";
         ViewData["Title"] = "Western Conference Standings";
         ViewData["Conference"] = "Western";
         return View("Standings");

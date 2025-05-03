@@ -5,5 +5,10 @@
     "[aspnetcorerazor]": {
         "editor.acceptSuggestionOnCommitCharacter": false,
         "editor.acceptSuggestionOnEnter": "off"
+    },
+    "[csharp]": {
+        "editor.rulers": [
+            120
+        ]
     }
 }
