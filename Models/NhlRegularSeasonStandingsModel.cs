@@ -28,7 +28,7 @@ public class NhlRegularSeasonStandingsModel
         [JsonPropertyName("teamAbbrev")]
         public required TeamAbbrevData _teamAbbrevData { get; set; }
         [JsonIgnore]
-        public string TeamAbbrev { get { return _teamAbbrevData.Name;}}
+        public string TeamAbbrev { get { return _teamAbbrevData.Name; } }
         public required string ConferenceName { get; set; }
         public int WildcardSequence { get; set; }
         public int DivisionSequence { get; set; }

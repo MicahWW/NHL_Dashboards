@@ -45,15 +45,15 @@ public class PlayoffsStandingsApiModel
             if ("ABCDEFGHIJKLMN".Contains(SeriesLetter))
             {
                 // The series listed below are all of the series that are in the Western conference, minus the final.
-                Conference =  "EFGHKLN".Contains(SeriesLetter) ? "Western" : "Eastern";
+                Conference = "EFGHKLN".Contains(SeriesLetter) ? "Western" : "Eastern";
             }
             else
             {
                 Conference = "Stanley Cup Final";
             }
 
-            TopTeam = new TeamData(topTeam, topSeedWins, topSeedRank, topSeedRankAbbr); 
-            BotTeam = new TeamData(botTeam, botSeedWins, botSeedRank, botSeedRankAbbr); 
+            TopTeam = new TeamData(topTeam, topSeedWins, topSeedRank, topSeedRankAbbr);
+            BotTeam = new TeamData(botTeam, botSeedWins, botSeedRank, botSeedRankAbbr);
         }
 
         public SeriesData() { }
