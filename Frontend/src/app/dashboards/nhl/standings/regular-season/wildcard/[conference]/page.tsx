@@ -1,5 +1,5 @@
 import { RegularSeasonWildcardData, TeamData } from "@/models/RegularSeasonWildcardData";
-import Team from "./team";
+import Team from "@/components/nhl_regular_season_team";
 
 export default async function Page({
     params,
