@@ -1,7 +1,7 @@
 "use client"
 import { RegularSeasonTeamGroupData } from "@/models/RegularSeasonTeamGroupData";
 import StandingSection from "../../StandingSection";
-import { useFontResizer } from "@/app/hooks/useFrontResizer";
+import { useFontResizer } from "@/hooks/useFrontResizer";
 
 type WildcardProps = {
     conference: "western" | "eastern";
