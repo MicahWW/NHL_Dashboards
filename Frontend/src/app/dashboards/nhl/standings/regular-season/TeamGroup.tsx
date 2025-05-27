@@ -1,5 +1,4 @@
 import TeamRow from "./TeamRow";
-// import { TeamData } from "@/models/RegularSeasonWildcardData";
 import { RegularSeasonTeamGroupData } from "@/models/RegularSeasonTeamGroupData";
 
 type TeamGroupProps = {
