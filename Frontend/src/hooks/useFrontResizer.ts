@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { adjustFontSize } from "@/utils/fontResizer";
 
-export const useFontResizer = (selector: string) => {
+export const useFontResizer = () => {
   useEffect(() => {
     const updateSizes = () => {
-      document.querySelectorAll(selector).forEach((element) => {
+      document.querySelectorAll("[data-resizable]").forEach((element) => {
         adjustFontSize(element as HTMLElement);
       });
     };

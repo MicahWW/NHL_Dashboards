@@ -16,7 +16,7 @@ type WildcardProps = {
 }
 
 const Wildcard = ({ conference, topConferenceTeams, botConferenceTeams, wildcardTeams, outsideTeams }: WildcardProps) => {
-    useFontResizer("[data-resizable]");
+    useFontResizer();
 
     const [conf, setConf] = useState(conference);
     const [topTeams, setTopTeams] = useState(topConferenceTeams);
