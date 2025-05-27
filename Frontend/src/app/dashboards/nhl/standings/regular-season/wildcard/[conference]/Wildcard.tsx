@@ -33,7 +33,7 @@ const Wildcard = ({ conference, topConferenceTeams, botConferenceTeams, wildcard
             setBotTeams( {team: data[2], name: "bot-division", indexStart: 1, displayName: data[3] });
             setWildcardTeams( {team: data[4], name: "wildcards", indexStart: 1, displayName: "Wildcards" });
             setOutsideTeams( {team: data[5], name: "wildcard-race", indexStart: 9, displayName: "Wildcard Race" });
-        }, 10000); 
+        }, 18000000); 
 
         return () => clearInterval(interval);
     });
