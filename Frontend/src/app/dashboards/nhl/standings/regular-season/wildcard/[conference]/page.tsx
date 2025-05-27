@@ -1,6 +1,7 @@
 import './styles.css';
 import Wildcard from "./Wildcard";
 import { fetchData } from "./fetchData";
+import { notFound } from 'next/navigation';
 
 export default async function Page({
     params,
@@ -9,7 +10,7 @@ export default async function Page({
 }) {
     const { conference } = await params;
     if (conference !== "western" && conference !== "eastern") {
-        return <div>Invalid conference</div>
+        return notFound();
     }
 
     const [topConferenceTeams, topConferenceName, botConferenceTeams, botConferenceName, wildcardTeams, outsideTeams] = await fetchData(conference);
