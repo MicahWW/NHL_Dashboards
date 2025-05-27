@@ -2,6 +2,7 @@ namespace NHL_Dashboards.Models;
 
 public class RegularSeasonStandingsApiModel
 {
+    public string? StandingsDateTimeUtc { get; set; }
     public TeamData? Central1 { get; set; }
     public TeamData? Central2 { get; set; }
     public TeamData? Central3 { get; set; }

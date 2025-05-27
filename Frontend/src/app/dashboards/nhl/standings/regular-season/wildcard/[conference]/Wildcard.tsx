@@ -3,9 +3,8 @@
 import { RegularSeasonTeamGroupData } from "@/models/RegularSeasonTeamGroupData";
 import StandingSection from "../../StandingSection";
 import { useFontResizer } from "@/hooks/useFrontResizer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchData } from "./fetchData";
-import { useState } from "react";
 
 type WildcardProps = {
     conference: "western" | "eastern";
@@ -33,7 +32,7 @@ const Wildcard = ({ conference, topConferenceTeams, botConferenceTeams, wildcard
             setBotTeams( {team: data[2], name: "bot-division", indexStart: 1, displayName: data[3] });
             setWildcardTeams( {team: data[4], name: "wildcards", indexStart: 1, displayName: "Wildcards" });
             setOutsideTeams( {team: data[5], name: "wildcard-race", indexStart: 9, displayName: "Wildcard Race" });
-        }, 18000000); 
+        }, 1800000); 
 
         return () => clearInterval(interval);
     });
@@ -41,7 +40,9 @@ const Wildcard = ({ conference, topConferenceTeams, botConferenceTeams, wildcard
     return (
         <>
             <div className="title">
-                <div data-resizable className="title-text">{conf == "western" ? "Western" : "Eastern"} Conference Standings</div>
+                <div data-resizable className="title-text">
+                    {conf == "western" ? "Western" : "Eastern"} Conference Standings
+                </div>
             </div>
 
             <main>
